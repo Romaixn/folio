@@ -2,7 +2,7 @@ import Container from '@/components/Container'
 
 export default function Hero() {
   return (
-      <Container>
+      <Container className="pb-16 sm:pb-24">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
             <span className="block text-indigo-600">
