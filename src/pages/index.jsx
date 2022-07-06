@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
       <div className="relative overflow-hidden bg-gray-50">
         <Header />
-        <main class="relative">
+        <main className="relative">
           <Hero />
         </main>
       </div>
