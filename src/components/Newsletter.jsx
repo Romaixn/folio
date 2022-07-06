@@ -3,7 +3,7 @@ import Container from '@/components/Container'
 export default function Newsletter() {
     return (
       <div className="bg-white">
-        <Container className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:py-16 lg:px-8">
+        <Container>
           <div className="py-10 px-6 bg-red-700 rounded-3xl sm:py-16 sm:px-12 lg:p-20 lg:flex lg:items-center">
             <div className="lg:w-0 lg:flex-1">
               <h2 className="text-3xl font-extrabold tracking-tight text-white">
