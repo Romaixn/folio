@@ -13,6 +13,7 @@ export default function Custom404() {
         <div className="-z-10">
             <Image
                 src={Background}
+                alt="Camping car (référence évidente à Breaking Bad)"
                 layout="fill"
                 objectFit='cover'
                 objectPosition={'bottom'}
