@@ -8,9 +8,6 @@ if (!process.env.WORDPRESS_API_URL) {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    domains: [process.env.WORDPRESS_API_URL.match(/(http(?:s)?:\/\/)(.*)/)[2]],
-  },
 }
 
 module.exports = nextConfig

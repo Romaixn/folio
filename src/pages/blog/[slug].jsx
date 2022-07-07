@@ -12,7 +12,7 @@ export default function Post({ post }) {
     return <ErrorPage statusCode={404} />
   }
 
-  const cleanExcerpt = post.excerpt.replace(/<\/?([a-zA-Z]\s?)*?([a-zA-Z]+?=\s?".*")*?([\s/]*?)>/gi, '');
+  const cleanExcerpt = post?.excerpt.replace(/<\/?([a-zA-Z]\s?)*?([a-zA-Z]+?=\s?".*")*?([\s/]*?)>/gi, '') ?? 'Romain Herault développeur web Full Stack spécialisé Symfony, Wordpress basé à Amiens.';
 
   return (
     <Layout>
