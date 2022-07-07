@@ -7,7 +7,6 @@ import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/wordpress/api'
 
 export default function Post({ post }) {
   const router = useRouter()
-  console.log(post)
 
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
@@ -18,7 +17,7 @@ export default function Post({ post }) {
   return (
     <Layout>
       <Head>
-        <title>{post.title} - Romain Herault</title>
+        <title>{`${post.title} - Romain Herault`}</title>
         <meta name="description" content={cleanExcerpt} />
       </Head>
       <div className="relative overflow-hidden bg-white py-16">
