@@ -11,7 +11,7 @@ const navigation = [
   { name: 'Accueil', href: '/' },
   { name: 'Projets', href: '#' },
   { name: 'Blog', href: '#' },
-  { name: 'Contact', href: '#' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 function MobileNavLink({ href, children }) {
@@ -98,7 +98,7 @@ function MobileNavigation() {
 export default function Header() {
   return (
     <>
-      <header className="relative py-10 pb-16 sm:pb-24 bg-white">
+      <header className="relative py-10 bg-gray-50">
         <Container>
           <nav className="relative z-50 flex justify-between">
             <div className="flex items-center md:gap-x-12">

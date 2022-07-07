@@ -11,7 +11,7 @@ const navigation = [
   { name: 'Accueil', href: '/' },
   { name: 'Projets', href: '#' },
   { name: 'Blog', href: '#' },
-  { name: 'Contact', href: '#' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 function MobileNavLink({ href, children }) {

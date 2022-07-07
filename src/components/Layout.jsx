@@ -5,12 +5,11 @@ import Newsletter from '@/components/Newsletter'
 export default function Layout({ children }) {
   return (
     <>
-      <div className="relative overflow-hidden bg-gray-50">
+      <div className="relative overflow-hidden">
         <Header />
         <main className="relative">
             {children}
         </main>
-        <Newsletter />
         <Footer />
       </div>
     </>

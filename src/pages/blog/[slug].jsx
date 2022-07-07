@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
 import Layout from '@/components/Layout'
+import Newsletter from '@/components/Newsletter'
 import Categories from '@/components/Categories'
 import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/wordpress/api'
 
@@ -12,7 +13,12 @@ export default function Post({ post }) {
     return <ErrorPage statusCode={404} />
   }
 
-  const cleanExcerpt = post?.excerpt.replace(/<\/?([a-zA-Z]\s?)*?([a-zA-Z]+?=\s?".*")*?([\s/]*?)>/gi, '') ?? 'Romain Herault développeur web Full Stack spécialisé Symfony, Wordpress basé à Amiens.';
+  const cleanExcerpt =
+    post?.excerpt.replace(
+      /<\/?([a-zA-Z]\s?)*?([a-zA-Z]+?=\s?".*")*?([\s/]*?)>/gi,
+      ''
+    ) ??
+    'Romain Herault développeur web Full Stack spécialisé Symfony, Wordpress basé à Amiens.'
 
   return (
     <Layout>
@@ -21,6 +27,10 @@ export default function Post({ post }) {
         <meta name="description" content={cleanExcerpt} />
       </Head>
       <div className="relative overflow-hidden bg-white py-16">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-gray-50"
+        ></div>
         <div className="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full">
           <div
             className="relative mx-auto h-full max-w-prose text-lg"
@@ -143,6 +153,7 @@ export default function Post({ post }) {
           ></div>
         </article>
       </div>
+      <Newsletter />
     </Layout>
   )
 }
