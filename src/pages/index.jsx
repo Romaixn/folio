@@ -37,6 +37,6 @@ export async function getStaticProps({ preview = false }) {
 
   return {
     props: { posts, preview },
-    revalidate: 10,
+    revalidate: 3600,
   }
 }
