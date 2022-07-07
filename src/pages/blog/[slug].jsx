@@ -17,7 +17,7 @@ export default function Post({ post }) {
   return (
     <Layout>
       <Head>
-        <title>{`${post.title} - Romain Herault`}</title>
+        <title>{`${post?.title} - Romain Herault`}</title>
         <meta name="description" content={cleanExcerpt} />
       </Head>
       <div className="relative overflow-hidden bg-white py-16">
@@ -127,19 +127,19 @@ export default function Post({ post }) {
         <article className="relative px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-prose text-lg">
             <h1>
-              <Categories categories={post.categories} />
+              <Categories categories={post?.categories} />
               <span className="mt-2 block text-center text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
-                {post.title}
+                {post?.title}
               </span>
             </h1>
             <div
               className="mt-8 text-xl leading-8 text-gray-500"
-              dangerouslySetInnerHTML={{ __html: post.excerpt }}
+              dangerouslySetInnerHTML={{ __html: post?.excerpt }}
             ></div>
           </div>
           <div
             className="prose prose-lg prose-red mx-auto mt-6 text-gray-500"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: post?.content }}
           ></div>
         </article>
       </div>
@@ -154,7 +154,6 @@ export async function getStaticProps({ params, preview = false, previewData }) {
     props: {
       preview,
       post: data.post,
-      posts: data.posts,
     },
     revalidate: 10,
   }
