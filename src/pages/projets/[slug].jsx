@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import ErrorPage from 'next/error'
 import Layout from '@/components/Layout'
-import Newsletter from '@/components/Newsletter'
 import { getAllProjects, getProject } from '@/lib/rherault/api'
 
 export default function Project({ project }) {
@@ -17,7 +16,7 @@ export default function Project({ project }) {
     <Layout>
       <Head>
         <title>{`${project?.title} - Romain Herault`}</title>
-        <meta name="description" content={project.excerpt} />
+        <meta name="description" content={project?.excerpt} />
       </Head>
 
       <div className="overflow-hidden bg-white">
@@ -26,16 +25,16 @@ export default function Project({ project }) {
           <div className="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8">
             <div>
               <h2 className="space-x-2 text-base font-semibold uppercase tracking-wide text-red-600">
-                {project.categories.length > 0 ? (
-                  project.categories.map((category, index) => (
+                {project?.categories.length > 0 ? (
+                  project?.categories.map((category, index) => (
                     <span key={index}>{category.name}</span>
                   ))
                 ) : (
-                  <span>{project.categories.name}</span>
+                  <span>{project?.categories.name}</span>
                 )}
               </h2>
               <h3 className="mt-2 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
-                {project.title}
+                {project?.title}
               </h3>
             </div>
           </div>
@@ -79,8 +78,8 @@ export default function Project({ project }) {
                   <div className="aspect-w-12 aspect-h-7 lg:aspect-none">
                     <Image
                       className="rounded-lg object-cover object-center shadow-lg"
-                      src={`https://api.rherault.fr/uploads/images/${project.photoFilename}`}
-                      alt={`Photo de ${project.title}`}
+                      src={`https://api.rherault.fr/uploads/images/${project?.photoFilename}`}
+                      alt={`Photo de ${project?.title}`}
                       width={1184}
                       height={1376}
                     />
@@ -91,7 +90,7 @@ export default function Project({ project }) {
             <div className="mt-8 lg:mt-0">
               <div
                 className="prose prose-red mx-auto mt-5 text-gray-500 lg:col-start-1 lg:row-start-1 lg:max-w-none"
-                dangerouslySetInnerHTML={{ __html: project.description }}
+                dangerouslySetInnerHTML={{ __html: project?.description }}
               ></div>
             </div>
           </div>
