@@ -4,7 +4,7 @@ import Container from '@/components/Container'
 const navigation = {
     main: [
       { name: 'Accueil', href: '/' },
-      { name: 'Projets', href: '#' },
+      { name: 'Projets', href: '/projets' },
       { name: 'Blog', href: '#' },
       { name: 'Contact', href: '/contact' },
     ],
