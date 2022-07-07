@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Container from '@/components/Container'
 
 const navigation = {
     main: [
@@ -36,7 +37,7 @@ const navigation = {
   export default function Example() {
     return (
       <footer className="relative bg-gray-50">
-        <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+        <Container className="py-12 overflow-hidden">
           <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
             {navigation.main.map((item) => (
               <div key={item.name} className="px-5 py-2">
@@ -59,7 +60,7 @@ const navigation = {
             ))}
           </div>
           <p className="mt-8 text-center text-base text-gray-400">&copy; 2022 Romain Herault. Tout droit réservé.</p>
-        </div>
+        </Container>
       </footer>
     )
   }
