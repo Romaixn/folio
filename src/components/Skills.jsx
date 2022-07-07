@@ -27,8 +27,8 @@ import {
   export default function Skills() {
     return (
       <div className="relative bg-white py-16 sm:py-24">
-        <div aria-hidden="true" className="hidden lg:block absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-gray-50"></div>
-        <Container className="text-center">
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-gray-50"></div>
+        <Container className="text-center relative">
           <h2 className="text-base font-semibold uppercase tracking-wider text-red-600">Compétences</h2>
           <p className="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             Mes services
