@@ -1,14 +1,10 @@
 import Head from 'next/head'
 
-import HeaderHome from '@/components/HeaderHome'
-import Hero from '@/components/Hero'
+import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import Skills from '@/components/Skills'
-import Posts from '@/components/Posts'
 import Newsletter from '@/components/Newsletter'
-import { getPostsForHome } from '@/lib/wordpress/api'
 
-export default function Home({ posts: { edges } }) {
+export default function Layout({ children }) {
   return (
     <>
       <Head>
@@ -19,24 +15,13 @@ export default function Home({ posts: { edges } }) {
         />
       </Head>
       <div className="relative overflow-hidden bg-gray-50">
-        <HeaderHome />
+        <Header />
         <main className="relative">
-          <Hero />
-          <Skills />
-          <Posts posts={edges} />
+            {children}
         </main>
         <Newsletter />
         <Footer />
       </div>
     </>
   )
-}
-
-export async function getStaticProps({ preview = false }) {
-  const posts = await getPostsForHome(preview)
-
-  return {
-    props: { posts, preview },
-    revalidate: 60,
-  }
 }

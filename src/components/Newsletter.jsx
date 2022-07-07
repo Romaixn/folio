@@ -7,10 +7,10 @@ export default function Newsletter() {
           <div className="py-10 px-6 bg-red-700 rounded-3xl sm:py-16 sm:px-12 lg:p-20 lg:flex lg:items-center">
             <div className="lg:w-0 lg:flex-1">
               <h2 className="text-3xl font-extrabold tracking-tight text-white">
-                Vous voulez restez à jour en tant que développeur ?
+                Tu veux restez à jour en tant que développeur ?
               </h2>
               <p className="mt-4 max-w-3xl text-lg text-red-100">
-                Inscrivez-vous pour recevoir ma veille technologique, toutes les semaines.
+                Inscris-toi pour recevoir ma veille technologique, toutes les semaines.
               </p>
             </div>
             <div className="mt-12 sm:w-full sm:max-w-md lg:mt-0 lg:ml-8 lg:flex-1">
