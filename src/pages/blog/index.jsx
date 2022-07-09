@@ -91,7 +91,6 @@ export default function Blog({ posts: { edges } }) {
 
 export async function getStaticProps() {
   const posts = await getAllPosts()
-  console.log(posts)
 
   return {
     props: { posts },
