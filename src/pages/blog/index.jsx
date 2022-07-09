@@ -74,7 +74,7 @@ export default function Blog({ posts: { edges } }) {
                   </a>
                 </Link>
                 <div className="mt-3">
-                  <Link href={`/blog/${node.href}`}>
+                  <Link href={`/blog/${node.slug}`}>
                     <a className="text-base font-semibold text-red-600 hover:text-red-500">
                         Lire l'article
                     </a>
