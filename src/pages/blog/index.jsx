@@ -19,7 +19,7 @@ export default function Blog({ posts: { edges } }) {
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-gray-50"
       ></div>
-      <Container className="bg-white pt-16 pb-20 lg:pb-28">
+      <Container className="bg-white pt-8 sm:pt-16 pb-20 lg:pb-28">
         <div className="relative mx-auto max-w-lg divide-y-2 divide-gray-200 lg:max-w-7xl">
           <div>
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
