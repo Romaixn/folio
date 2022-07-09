@@ -12,7 +12,7 @@ export default function Blog({ posts: { edges } }) {
         <title>Blog - Romain Herault</title>
         <meta
           name="description"
-          content="Articles sur de la veille technologique, PHP, WordPress, Symfony, CI/CD, développement web."
+          content="Découvrez de nombreux articles parlant d'expériences, de découvertes et de tutoriels dans l'ensemble de ces domaines : PHP, WordPress, Symfony, CI/CD, développement web."
         />
       </Head>
       <div
