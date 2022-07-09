@@ -10,7 +10,7 @@ import NavLink from '@/components/NavLink'
 const navigation = [
   { name: 'Accueil', href: '/' },
   { name: 'Projets', href: '/projets' },
-  { name: 'Blog', href: '#' },
+  { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
 ]
 

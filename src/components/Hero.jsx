@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Container from '@/components/Container'
 
 export default function Hero() {
@@ -23,12 +24,13 @@ export default function Hero() {
               </a>
             </div>
             <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-              <a
-                href="#"
-                className="flex w-full items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-red-600 hover:bg-gray-50 md:py-4 md:px-10 md:text-lg"
-              >
-                Me contacter
-              </a>
+              <Link href="/contact">
+                  <a
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-red-600 hover:bg-gray-50 md:py-4 md:px-10 md:text-lg"
+                  >
+                    Me contacter
+                  </a>
+              </Link>
             </div>
           </div>
         </div>

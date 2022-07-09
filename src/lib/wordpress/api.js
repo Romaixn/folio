@@ -44,18 +44,36 @@ export async function getPreviewPost(id, idType = 'DATABASE_ID') {
   return data.post
 }
 
-export async function getAllPostsWithSlug() {
+export async function getAllPosts() {
   const data = await fetchAPI(`
     {
-      posts(first: 10000) {
+      posts(first: 10000, where: { orderby: { field: DATE, order: DESC } }) {
         edges {
           node {
+            title
+            excerpt
             slug
+            date
           }
         }
       }
     }
   `)
+  return data?.posts
+}
+
+export async function getAllPostsWithSlug() {
+  const data = await fetchAPI(`
+      {
+        posts(first: 10000) {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
+      }
+    `)
   return data?.posts
 }
 
