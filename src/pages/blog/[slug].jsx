@@ -26,7 +26,7 @@ export default function Post({ post }) {
         <title>{`${post?.title} - Romain Herault`}</title>
         <meta name="description" content={cleanExcerpt} />
       </Head>
-      <div className="relative overflow-hidden bg-white py-16">
+      <div className="relative overflow-hidden bg-white py-8 sm:py-16">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-gray-50"

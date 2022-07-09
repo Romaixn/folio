@@ -12,7 +12,7 @@ export default function Contact() {
       <div className="bg-white">
         <main className="overflow-hidden">
           <div className="bg-gray-50">
-            <div className="py-16">
+            <div className="py-8 sm:py-16">
               <div className="relative z-10 mx-auto max-w-7xl pl-4 pr-8 sm:px-6 lg:px-8">
                 <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
                   Contactez-moi

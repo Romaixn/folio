@@ -15,7 +15,7 @@ export default function Projects({ projects }) {
           content="Développeur Symfony, Wordpress, Django. Découvrez la liste de mes projets Symfony et WordPress."
         />
       </Head>
-      <div className="pt-16">
+      <div className="py-8 sm:py-16">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-gray-50"
