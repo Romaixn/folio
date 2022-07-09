@@ -1,13 +1,14 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import ErrorPage from 'next/error'
 import Layout from '@/components/Layout'
 import Container from '@/components/Container'
-import { getPlaiceholder } from "plaiceholder";
+import { getPlaiceholder } from 'plaiceholder'
 import { getAllProjects, getProject } from '@/lib/rherault/api'
 
-export default function Project({ project, blurDataURL}) {
+export default function Project({ project, blurDataURL }) {
   const router = useRouter()
 
   if (!router.isFallback && !project) {
@@ -97,6 +98,13 @@ export default function Project({ project, blurDataURL}) {
                 dangerouslySetInnerHTML={{ __html: project?.description }}
               ></div>
             </div>
+            {project.url && (
+              <Link href={project.url}>
+                <a className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:inline-flex sm:w-auto">
+                  Voir le site
+                </a>
+              </Link>
+            )}
           </div>
         </Container>
       </div>
@@ -106,12 +114,14 @@ export default function Project({ project, blurDataURL}) {
 
 export async function getStaticProps({ params }) {
   const project = await getProject(params.slug)
-  const { base64, img } = await getPlaiceholder(`https://api.rherault.fr/uploads/images/${project?.photoFilename}`);
+  const { base64, img } = await getPlaiceholder(
+    `https://api.rherault.fr/uploads/images/${project?.photoFilename}`
+  )
 
   return {
     props: {
       project: project,
-      blurDataURL: base64
+      blurDataURL: base64,
     },
     revalidate: 10,
   }
