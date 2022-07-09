@@ -3,9 +3,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import ErrorPage from 'next/error'
 import Layout from '@/components/Layout'
+import { getPlaiceholder } from "plaiceholder";
 import { getAllProjects, getProject } from '@/lib/rherault/api'
 
-export default function Project({ project }) {
+export default function Project({ project, blurDataURL}) {
   const router = useRouter()
 
   if (!router.isFallback && !project) {
@@ -82,6 +83,8 @@ export default function Project({ project }) {
                       alt={`Photo de ${project?.title}`}
                       width={1184}
                       height={1376}
+                      placeholder="blur"
+                      blurDataURL={blurDataURL}
                     />
                   </div>
                 </figure>
@@ -102,10 +105,12 @@ export default function Project({ project }) {
 
 export async function getStaticProps({ params }) {
   const project = await getProject(params.slug)
+  const { base64, img } = await getPlaiceholder(`https://api.rherault.fr/uploads/images/${project?.photoFilename}`);
 
   return {
     props: {
       project: project,
+      blurDataURL: base64
     },
     revalidate: 10,
   }
