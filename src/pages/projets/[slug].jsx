@@ -96,15 +96,19 @@ export default function Project({ project, blurDataURL }) {
                 className="prose prose-red mx-auto mt-5 text-gray-500 lg:col-start-1 lg:row-start-1 lg:max-w-none"
                 dangerouslySetInnerHTML={{ __html: project?.description }}
               ></div>
+              {project?.url && (
+                <div className="prose mx-auto lg:mx-0 mt-8">
+                  <div className="not-prose">
+                    <a
+                      href={project?.url}
+                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:inline-flex sm:w-auto"
+                    >
+                      Voir le site
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
-            {project?.url && (
-              <a
-                href={project?.url}
-                className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:inline-flex sm:w-auto"
-              >
-                Voir le site
-              </a>
-            )}
           </div>
         </Container>
       </div>
