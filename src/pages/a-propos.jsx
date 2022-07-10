@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import Layout from '@/components/Layout'
 import Container from '@/components/Container'
 
@@ -155,12 +156,13 @@ export default function About() {
                   </div>
                 </div>
                 <div className="mt-8 inline-flex rounded-md shadow">
-                  <a
-                    href="/contact"
-                    className="flex items-center justify-center rounded-md border border-transparent bg-red-600 px-5 py-3 text-base font-medium text-white hover:bg-red-700"
-                  >
-                    Contactez-moi
-                  </a>
+                  <Link href="/contact">
+                      <a
+                        className="flex items-center justify-center rounded-md border border-transparent bg-red-600 px-5 py-3 text-base font-medium text-white hover:bg-red-700"
+                      >
+                        Contactez-moi
+                      </a>
+                  </Link>
                 </div>
               </div>
             </div>
