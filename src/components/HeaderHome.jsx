@@ -8,7 +8,7 @@ import Logo from '@/components/Logo'
 import NavLink from '@/components/NavLink'
 
 const navigation = [
-  { name: 'Accueil', href: '/' },
+  { name: 'À propos', href: '/a-propos' },
   { name: 'Projets', href: '/projets' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
