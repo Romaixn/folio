@@ -1,14 +1,54 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import Layout from '@/components/Layout'
+import Notification from '@/components/Notification'
 import { MailIcon } from '@heroicons/react/outline'
 
 export default function Contact() {
+  const [notification, setNotification] = useState(null)
+
+  const submitContact = async (event) => {
+    event.preventDefault()
+    const firstName = event.target.firstName.value
+    const lastName = event.target.lastName.value
+    const email = event.target.email.value
+    const phone = event.target.phone.value
+    const subject = event.target.subject.value
+    const message = event.target.message.value
+
+    const res = await fetch('/api/contact', {
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        phone,
+        subject,
+        message,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    })
+
+    notification = await res.json()
+    setNotification(notification)
+    event.target.reset()
+  }
+
   return (
     <Layout>
       <Head>
         <title>Contactez-moi - Romain Herault</title>
-        <meta name="description" content="Romain HERAULT, Développeur web Full Stack spécialisé Symfony et WordPress. N'hésitez pas à me contacter." />
+        <meta
+          name="description"
+          content="Romain HERAULT, Développeur web Full Stack spécialisé Symfony et WordPress. N'hésitez pas à me contacter."
+        />
       </Head>
+
+      {notification && (
+        <Notification title="Le message a bien été envoyé !" message={notification} />
+      )}
       <div className="bg-white">
         <main className="overflow-hidden">
           <div className="bg-gray-50">
@@ -241,13 +281,12 @@ export default function Contact() {
                       Envoyez moi un message
                     </h3>
                     <form
-                      action="#"
-                      method="POST"
+                      onSubmit={submitContact}
                       className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
                     >
                       <div>
                         <label
-                          htmlFor="first-name"
+                          htmlFor="firstName"
                           className="block text-sm font-medium text-gray-900"
                         >
                           Prénom
@@ -255,16 +294,17 @@ export default function Contact() {
                         <div className="mt-1">
                           <input
                             type="text"
-                            name="first-name"
-                            id="first-name"
+                            name="firstName"
+                            id="firstName"
                             autoComplete="given-name"
                             className="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-red-500 focus:ring-red-500"
+                            required
                           />
                         </div>
                       </div>
                       <div>
                         <label
-                          htmlFor="last-name"
+                          htmlFor="lastName"
                           className="block text-sm font-medium text-gray-900"
                         >
                           Nom
@@ -272,10 +312,11 @@ export default function Contact() {
                         <div className="mt-1">
                           <input
                             type="text"
-                            name="last-name"
-                            id="last-name"
+                            name="lastName"
+                            id="lastName"
                             autoComplete="family-name"
                             className="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-red-500 focus:ring-red-500"
+                            required
                           />
                         </div>
                       </div>
@@ -293,6 +334,7 @@ export default function Contact() {
                             type="email"
                             autoComplete="email"
                             className="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-red-500 focus:ring-red-500"
+                            required
                           />
                         </div>
                       </div>
@@ -335,6 +377,7 @@ export default function Contact() {
                             name="subject"
                             id="subject"
                             className="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-red-500 focus:ring-red-500"
+                            required
                           />
                         </div>
                       </div>
@@ -361,6 +404,7 @@ export default function Contact() {
                             className="block w-full rounded-md border border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-red-500 focus:ring-red-500"
                             aria-describedby="message-max"
                             defaultValue={''}
+                            required
                           />
                         </div>
                       </div>
