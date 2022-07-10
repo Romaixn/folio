@@ -97,9 +97,9 @@ export default function Project({ project, blurDataURL }) {
                 dangerouslySetInnerHTML={{ __html: project?.description }}
               ></div>
             </div>
-            {project.url && (
+            {project?.url && (
               <a
-                href={project.url}
+                href={project?.url}
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:inline-flex sm:w-auto"
               >
                 Voir le site
