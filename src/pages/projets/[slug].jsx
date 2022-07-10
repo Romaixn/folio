@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 import ErrorPage from 'next/error'
 import Layout from '@/components/Layout'
 import Container from '@/components/Container'
@@ -99,11 +98,12 @@ export default function Project({ project, blurDataURL }) {
               ></div>
             </div>
             {project.url && (
-              <Link href={project.url}>
-                <a className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:inline-flex sm:w-auto">
-                  Voir le site
-                </a>
-              </Link>
+              <a
+                href={project.url}
+                className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:inline-flex sm:w-auto"
+              >
+                Voir le site
+              </a>
             )}
           </div>
         </Container>
