@@ -101,58 +101,22 @@ export default function About() {
                 <div className="lg:grid lg:grid-cols-2 lg:gap-6">
                   <div className="prose prose-lg prose-red text-gray-500 lg:max-w-none">
                     <p>
-                      Ultrices ultricies a in odio consequat egestas rutrum. Ut
-                      vitae aliquam in ipsum. Duis nullam placerat cursus risus
-                      ultrices nisi, vitae tellus in. Qui non fugiat aut minus
-                      aut rerum. Perspiciatis iusto mollitia iste minima soluta
-                      id.
+                        Hey 👋🏻 ! Moi c'est Romain, passionné par les nouvelles technologies et leurs facultés à améliorer nos vies.
                     </p>
-                    <p>
-                      Erat pellentesque dictumst ligula porttitor risus eget et
-                      eget. Ultricies tellus felis id dignissim eget. Est augue{' '}
-                      <a href="#">maecenas</a> risus nulla ultrices congue nunc
-                      tortor. Eu leo risus porta integer suspendisse sed sit
-                      ligula elit.
-                    </p>
-                    <ol role="list">
-                      <li>
-                        Integer varius imperdiet sed interdum felis cras in nec
-                        nunc.
-                      </li>
-                      <li>
-                        Quam malesuada odio ut sit egestas. Elementum at porta
-                        vitae.
-                      </li>
-                    </ol>
-                    <p>
-                      Amet, eu nulla id molestie quis tortor. Auctor erat justo,
-                      sed pellentesque scelerisque interdum blandit lectus. Nec
-                      viverra amet ac facilisis vestibulum. Vestibulum purus
-                      nibh ac ultricies congue.
-                    </p>
+                    <p>Je suis développeur web orienté backend mais "touche à tout" (d'où le fullstack) ! J'apprécie plus particulièrement Symfony et WordPress combiné avec TailwindCSS (❤️) pour créer de véritables chef d'oeuvre.</p>
+                    <p>Être fier de mon code est une véritable philosophie de vie, j'en parle <Link href="/blog/devenir-meilleur-developpeur-clean-code">ici</Link>. C'est pour cela que je m'intéresse de plus en plus aux architectures de code modernes et aux principes lié au "Clean Code" (SOLID, DDD, etc..)</p>
+                    <p>Diplômé d'une Licence Professionnel Web et Mobile à l'IUT d'Orléans à la suite d'un DUT Informatique, je n'ai cessé de me former davantage depuis.</p>
                   </div>
                   <div className="prose prose-lg prose-red mt-6 text-gray-500 lg:mt-0">
-                    <p>
-                      Erat pellentesque dictumst ligula porttitor risus eget et
-                      eget. Ultricies tellus felis id dignissim eget. Est augue
-                      maecenas risus nulla ultrices congue nunc tortor.
-                    </p>
-                    <p>
-                      Eu leo risus porta integer suspendisse sed sit ligula
-                      elit. Elit egestas lacinia sagittis pellentesque neque
-                      dignissim vulputate sodales. Diam sed mauris felis risus,
-                      ultricies mauris netus tincidunt. Mauris sit eu ac tellus
-                      nibh non eget sed accumsan. Viverra ac sed venenatis
-                      pulvinar elit. Cras diam quis tincidunt lectus. Non mi
-                      vitae, scelerisque felis nisi, netus amet nisl.
-                    </p>
-                    <p>
-                      Eu eu mauris bibendum scelerisque adipiscing et. Justo,
-                      elementum consectetur morbi eros, posuere ipsum tortor.
-                      Eget cursus massa sed velit feugiat sed ut. Faucibus eros
-                      mauris morbi aliquam nullam. Scelerisque elementum sit
-                      magna ullamcorper dignissim pretium.
-                    </p>
+                    <p>Je peux vous aider à réaliser un projet dans toutes ces étapes de la conception :</p>
+                    <ol role="list">
+                      <li>Analyse du cahier des charges et choix des technologies</li>
+                      <li>Développement</li>
+                      <li>Mise en production</li>
+                      <li>Formation</li>
+                    </ol>
+                    <p>Actuellement en poste de développeur web backend chez <a href="https://agence-ewill.com">Ewill</a>, agence web.</p>
+                    <p>Ce portfolio retrace mes découvertes et expériences. J'apprécie faire de la veille technologique et la partager via mon blog ou ma newsletter.</p>
                   </div>
                 </div>
                 <div className="mt-8 inline-flex rounded-md shadow">
