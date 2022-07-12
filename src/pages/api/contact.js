@@ -22,7 +22,11 @@ export default async function handler(req, res) {
     body: JSON.stringify(body),
   })
     .then((response) => {
-      res.status(response.status).json('Merci de votre message.')
+      res
+        .status(response.status)
+        .json(
+          'Merci pour votre message, je vous recontacterai dans les plus brefs délais.'
+        )
     })
     .catch((error) => {
       console.error(error)
