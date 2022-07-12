@@ -6,8 +6,10 @@ import { MailIcon } from '@heroicons/react/outline'
 
 export default function Contact() {
   const [notification, setNotification] = useState(null)
+  const [sending, setSending] = useState(false)
 
   const submitContact = async (event) => {
+    setSending(true)
     event.preventDefault()
     const firstName = event.target.firstName.value
     const lastName = event.target.lastName.value
@@ -34,6 +36,7 @@ export default function Contact() {
     notification = await res.json()
     setNotification(notification)
     event.target.reset()
+    setSending(false)
   }
 
   return (
@@ -411,7 +414,8 @@ export default function Contact() {
                       <div className="sm:col-span-2 sm:flex sm:justify-end">
                         <button
                           type="submit"
-                          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-red-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:w-auto"
+                          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-red-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:w-auto disabled:opacity-80"
+                          {...(sending ? { disabled: true } : {})}
                         >
                           Envoyer
                         </button>
