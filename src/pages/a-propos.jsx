@@ -101,14 +101,14 @@ export default function About() {
                 <div className="lg:grid lg:grid-cols-2 lg:gap-6">
                   <div className="prose prose-lg prose-red text-gray-500 lg:max-w-none">
                     <p>
-                        Hey 👋🏻 ! Moi c'est Romain, passionné par les nouvelles technologies et leurs facultés à améliorer nos vies.
+                        Hey 👋🏻 ! Moi c'est <strong>Romain</strong>, passionné par les nouvelles technologies et leurs facultés à améliorer nos vies.
                     </p>
-                    <p>Je suis développeur web orienté backend mais "touche à tout" (d'où le fullstack) ! J'apprécie plus particulièrement Symfony et WordPress combiné avec TailwindCSS (❤️) pour créer de véritables chef d'oeuvre.</p>
-                    <p>Être fier de mon code est une véritable philosophie de vie, j'en parle <Link href="/blog/devenir-meilleur-developpeur-clean-code">ici</Link>. C'est pour cela que je m'intéresse de plus en plus aux architectures de codes modernes et aux principes liés au "Clean Code" (SOLID, DDD, etc..)</p>
+                    <p>Je suis <strong>développeur web orienté backend</strong> mais "touche à tout" (d'où le <strong>fullstack</strong>) ! J'apprécie plus particulièrement <strong>Symfony</strong> et <strong>WordPress</strong> combiné avec <strong>Tailwind CSS</strong> (❤️) pour créer de magnifiques sites performants.</p>
+                    <p>Être fier de mon code est une véritable philosophie de vie, j'en parle <Link href="/blog/devenir-meilleur-developpeur-clean-code">ici</Link>. C'est pour cela que je m'intéresse de plus en plus aux <strong>architectures de codes modernes</strong> et aux principes liés au "<strong>Clean Code</strong>" (SOLID, DDD, etc..)</p>
                     <p>Diplômé d'une Licence Professionnelle Web et Mobile à l'IUT d'Orléans à la suite d'un DUT Informatique, je n'ai cessé de me former davantage depuis.</p>
                   </div>
                   <div className="prose prose-lg prose-red mt-6 text-gray-500 lg:mt-0">
-                    <p>Je peux vous aider à réaliser un projet dans toutes ses étapes de la conception :</p>
+                    <p>Je peux vous aider à <strong>réaliser un projet</strong> dans toutes ses étapes de la conception :</p>
                     <ol role="list">
                       <li>Analyse du cahier des charges et choix des technologies</li>
                       <li>Développement</li>
@@ -116,7 +116,7 @@ export default function About() {
                       <li>Formation</li>
                     </ol>
                     <p>Actuellement en poste de développeur web backend chez <a href="https://agence-ewill.com">Ewill</a>, agence web.</p>
-                    <p>Ce portfolio retrace mes découvertes et expériences. J'apprécie faire de la veille technologique et la partager via mon blog ou ma newsletter.</p>
+                    <p>Ce portfolio retrace mes <strong>découvertes et expériences</strong>. J'apprécie faire de la <strong>veille technologique</strong> et la partager via mon blog ou ma newsletter.</p>
                   </div>
                 </div>
                 <div className="mt-8 inline-flex rounded-md shadow">
