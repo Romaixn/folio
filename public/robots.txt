@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://rherault.fr
+
+# Sitemaps
+Sitemap: https://rherault.fr/sitemap.xml
