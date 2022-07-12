@@ -104,11 +104,11 @@ export default function About() {
                         Hey 👋🏻 ! Moi c'est Romain, passionné par les nouvelles technologies et leurs facultés à améliorer nos vies.
                     </p>
                     <p>Je suis développeur web orienté backend mais "touche à tout" (d'où le fullstack) ! J'apprécie plus particulièrement Symfony et WordPress combiné avec TailwindCSS (❤️) pour créer de véritables chef d'oeuvre.</p>
-                    <p>Être fier de mon code est une véritable philosophie de vie, j'en parle <Link href="/blog/devenir-meilleur-developpeur-clean-code">ici</Link>. C'est pour cela que je m'intéresse de plus en plus aux architectures de code modernes et aux principes lié au "Clean Code" (SOLID, DDD, etc..)</p>
-                    <p>Diplômé d'une Licence Professionnel Web et Mobile à l'IUT d'Orléans à la suite d'un DUT Informatique, je n'ai cessé de me former davantage depuis.</p>
+                    <p>Être fier de mon code est une véritable philosophie de vie, j'en parle <Link href="/blog/devenir-meilleur-developpeur-clean-code">ici</Link>. C'est pour cela que je m'intéresse de plus en plus aux architectures de codes modernes et aux principes liés au "Clean Code" (SOLID, DDD, etc..)</p>
+                    <p>Diplômé d'une Licence Professionnelle Web et Mobile à l'IUT d'Orléans à la suite d'un DUT Informatique, je n'ai cessé de me former davantage depuis.</p>
                   </div>
                   <div className="prose prose-lg prose-red mt-6 text-gray-500 lg:mt-0">
-                    <p>Je peux vous aider à réaliser un projet dans toutes ces étapes de la conception :</p>
+                    <p>Je peux vous aider à réaliser un projet dans toutes ses étapes de la conception :</p>
                     <ol role="list">
                       <li>Analyse du cahier des charges et choix des technologies</li>
                       <li>Développement</li>
