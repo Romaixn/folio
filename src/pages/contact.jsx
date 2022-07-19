@@ -6,6 +6,7 @@ import { MailIcon } from '@heroicons/react/outline'
 
 export default function Contact() {
   const [notification, setNotification] = useState(null)
+  const [status, setStatus] = useState(null)
   const [sending, setSending] = useState(false)
 
   const submitContact = async (event) => {
@@ -33,6 +34,7 @@ export default function Contact() {
       method: 'POST',
     })
 
+    setStatus(res.status)
     notification = await res.json()
     setNotification(notification)
     event.target.reset()
@@ -50,7 +52,7 @@ export default function Contact() {
       </Head>
 
       {notification && (
-        <Notification title="Le message a bien été envoyé !" message={notification} />
+        <Notification title={status === 201 ? "Le message a bien été envoyé !": "Oups, une erreur s'est produite !"} status={status} message={notification} />
       )}
       <div className="bg-white">
         <main className="overflow-hidden">
