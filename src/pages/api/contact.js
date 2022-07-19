@@ -1,3 +1,5 @@
+import { productionBrowserSourceMaps } from 'next.config'
+
 const API_URL = process.env.RHERAULT_API_URL
 
 export default async function handler(req, res) {
@@ -10,9 +12,7 @@ export default async function handler(req, res) {
     !body.subject ||
     !body.message
   ) {
-    return res
-      .status(400)
-      .json({ data: 'Merci de remplir tout les champs requis.' })
+    return res.status(400).json('Merci de remplir tout les champs requis.')
   }
 
   const headers = { 'Content-Type': 'application/json' }
@@ -22,11 +22,18 @@ export default async function handler(req, res) {
     body: JSON.stringify(body),
   })
     .then((response) => {
-      res
-        .status(response.status)
-        .json(
-          'Merci pour votre message, je vous recontacterai dans les plus brefs délais.'
-        )
+      if (response.status === 201) {
+        res
+          .status(response.status)
+          .json(
+            'Merci pour votre message, je vous recontacterai dans les plus brefs délais.'
+          )
+      } else {
+        res
+          .status(response.status)
+          .json("Une erreur s'est produite, merci de réessayer.")
+      }
+      res.status(response.status).json()
     })
     .catch((error) => {
       console.error(error)
