@@ -16,7 +16,7 @@ export default async function handler(req, res) {
   }
 
   const headers = { 'Content-Type': 'application/json' }
-  fetch(`${API_URL}/contacts`, {
+  fetch(`${API_URL}/contact`, {
     headers,
     method: 'POST',
     body: JSON.stringify(body),
