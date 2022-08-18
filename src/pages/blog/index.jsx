@@ -41,6 +41,10 @@ export default function Blog({ posts: { edges } }) {
           name="description"
           content="Découvrez de nombreux articles parlant d'expériences, de découvertes et de tutoriels dans l'ensemble de ces domaines : PHP, WordPress, Symfony, CI/CD, développement web."
         />
+        <meta name="og:title" content="Blog - Romain Herault" />
+        <meta name="og:type" content="blog" />
+        <meta name="og:site_name" content="rherault" />
+        <meta name="og:description" content="Découvrez de nombreux articles parlant d'expériences, de découvertes et de tutoriels dans l'ensemble de ces domaines : PHP, WordPress, Symfony, CI/CD, développement web." />
       </Head>
       <div
         aria-hidden="true"

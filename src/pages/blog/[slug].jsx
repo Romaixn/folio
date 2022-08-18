@@ -25,6 +25,10 @@ export default function Post({ post }) {
       <Head>
         <title>{`${post?.title} - Romain Herault`}</title>
         <meta name="description" content={cleanExcerpt} />
+        <meta name="og:title" content={`${post?.title} - Romain Herault`} />
+        <meta name="og:type" content="article" />
+        <meta name="og:site_name" content="rherault" />
+        <meta name="og:description" content={cleanExcerpt} />
       </Head>
       <div className="relative overflow-hidden bg-white py-8 sm:py-16">
         <div

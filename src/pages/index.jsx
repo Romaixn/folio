@@ -17,6 +17,10 @@ export default function Home({ posts: { edges } }) {
           name="description"
           content="Romain Herault développeur web Full Stack spécialisé Symfony, Wordpress basé à Amiens."
         />
+        <meta name="og:title" content="Développeur web Symfony - Romain Herault" />
+        <meta name="og:type" content="page" />
+        <meta name="og:site_name" content="rherault" />
+        <meta name="og:description" content="Romain Herault développeur web Full Stack spécialisé Symfony, Wordpress basé à Amiens." />
       </Head>
       <div className="relative overflow-hidden bg-gray-50">
         <HeaderHome />
