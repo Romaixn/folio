@@ -5,7 +5,7 @@ import clsx from 'clsx'
 
 import Container from '@/components/Container'
 import Logo from '@/components/Logo'
-import NavLink from '@/components/NavLink'
+import NavLinks from '@/components/NavLinks'
 
 const navigation = [
   { name: 'À propos', href: '/a-propos' },
@@ -174,17 +174,11 @@ export default function HeaderHome() {
         <Container>
           <nav className="relative z-50 flex justify-between">
             <div className="flex items-center md:gap-x-12">
-              <Link href="/" aria-label="Home">
-                <a>
-                    <Logo className="h-10 w-auto" />
-                </a>
+              <Link href="/" aria-label="Accueil" title="Accueil">
+                <Logo className="h-10 w-auto" />
               </Link>
               <div className="hidden md:flex md:gap-x-6">
-                {navigation.map((item) => (
-                  <NavLink key={item.name} href={item.href}>
-                    {item.name}
-                  </NavLink>
-                ))}
+                <NavLinks />
               </div>
             </div>
             <div className="flex items-center gap-x-5 md:gap-x-8">
