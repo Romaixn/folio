@@ -16,17 +16,13 @@ import Date from '@/components/Date'
                 <p className="text-sm text-gray-500">
                   <Date dateString={node.date} />
                 </p>
-                <Link href={`/blog/${node.slug}`}>
-                    <a className="mt-2 block">
-                      <p className="text-xl font-semibold text-gray-900">{node.title}</p>
-                      <div className="mt-3 text-base text-gray-500" dangerouslySetInnerHTML={{ __html: node.excerpt }}></div>
-                    </a>
+                <Link href={`/blog/${node.slug}`} className="mt-2 block">
+                    <p className="text-xl font-semibold text-gray-900">{node.title}</p>
+                    <div className="mt-3 text-base text-gray-500" dangerouslySetInnerHTML={{ __html: node.excerpt }}></div>
                 </Link>
                 <div className="mt-3">
-                  <Link href={`/blog/${node.slug}`}>
-                      <a className="text-base font-semibold text-red-600 hover:text-red-500">
-                        Lire l'article
-                      </a>
+                  <Link href={`/blog/${node.slug}`} className="text-base font-semibold text-red-600 hover:text-red-500">
+                      Lire l'article
                   </Link>
                 </div>
               </div>

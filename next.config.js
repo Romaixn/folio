@@ -15,6 +15,9 @@ if (!process.env.RHERAULT_API_URL) {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    newNextLinkBehavior: true,
+  },
   images: {
     domains: ['api.rherault.fr'],
   },
