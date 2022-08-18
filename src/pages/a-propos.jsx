@@ -12,6 +12,10 @@ export default function About() {
           name="description"
           content="Romain HERAULT, Développeur web Full Stack spécialisé Symfony et WordPress."
         />
+        <meta name="og:title" content="À propos - Romain Herault" />
+        <meta name="og:type" content="page" />
+        <meta name="og:site_name" content="rherault" />
+        <meta name="og:description" content="Romain HERAULT, Développeur web Full Stack spécialisé Symfony et WordPress." />
       </Head>
       <div className="pb-16">
         <div

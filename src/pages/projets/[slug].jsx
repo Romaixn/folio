@@ -19,6 +19,11 @@ export default function Project({ project, blurDataURL }) {
       <Head>
         <title>{`${project?.title} - Romain Herault`}</title>
         <meta name="description" content={project?.excerpt} />
+        <meta name="og:title" content={`${project?.title} - Romain Herault`} />
+        <meta name="og:type" content="project" />
+        <meta name="og:image" content={`https://api.rherault.fr/uploads/images/${project?.photoFilename}`} />
+        <meta name="og:site_name" content="rherault" />
+        <meta name="og:description" content={project?.excerpt} />
       </Head>
 
       <div className="overflow-hidden bg-white">

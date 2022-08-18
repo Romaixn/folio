@@ -49,6 +49,10 @@ export default function Contact() {
           name="description"
           content="Romain HERAULT, Développeur web Full Stack spécialisé Symfony et WordPress. N'hésitez pas à me contacter."
         />
+        <meta name="og:title" content="Contactez-moi - Romain Herault" />
+        <meta name="og:type" content="page" />
+        <meta name="og:site_name" content="rherault" />
+        <meta name="og:description" content="Romain HERAULT, Développeur web Full Stack spécialisé Symfony et WordPress. N'hésitez pas à me contacter." />
       </Head>
 
       {notification && (

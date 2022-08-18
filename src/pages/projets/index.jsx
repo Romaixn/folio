@@ -14,6 +14,10 @@ export default function Projects({ projects }) {
           name="description"
           content="Développeur Symfony, Wordpress, Django. Découvrez la liste de mes projets Symfony et WordPress."
         />
+        <meta name="og:title" content="Mes projets - Romain Herault" />
+        <meta name="og:type" content="projects" />
+        <meta name="og:site_name" content="rherault" />
+        <meta name="og:description" content="Développeur Symfony, Wordpress, Django. Découvrez la liste de mes projets Symfony et WordPress." />
       </Head>
       <div className="py-8 sm:py-16">
         <div
