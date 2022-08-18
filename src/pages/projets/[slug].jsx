@@ -18,7 +18,7 @@ export default function Project({ project, blurDataURL }) {
     <Layout>
       <Head>
         <title>{`${project?.title} - Romain Herault`}</title>
-        <meta name="description" content={project?.excerpt} />
+        <meta name="description" content={`${project?.excerpt}`} />
       </Head>
 
       <div className="overflow-hidden bg-white">
