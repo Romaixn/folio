@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react'
 import { Transition } from '@headlessui/react'
-import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/outline'
-import { XIcon } from '@heroicons/react/solid'
+import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/20/solid'
 
 export default function Notification({ title, status, message }) {
   const [show, setShow] = useState(true)
@@ -54,7 +54,7 @@ export default function Notification({ title, status, message }) {
                       }}
                     >
                       <span className="sr-only">Fermer</span>
-                      <XIcon className="h-5 w-5" aria-hidden="true" />
+                      <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                     </button>
                   </div>
                 </div>

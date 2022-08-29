@@ -1,26 +1,26 @@
 import Container from '@/components/Container'
 
 import {
-    CursorClickIcon,
-    GlobeIcon,
-    ServerIcon,
-  } from '@heroicons/react/outline'
+    CursorArrowRaysIcon,
+    GlobeAltIcon,
+    ServerStackIcon,
+  } from '@heroicons/react/24/outline'
 
   const features = [
     {
       name: 'Backend',
       description: 'Plus de 5 ans d\'expérience dans la réalisation d\'applications PHP et je maîtrise le framework Symfony 6.',
-      icon: ServerIcon,
+      icon: ServerStackIcon,
     },
     {
       name: 'Frontend',
       description: 'Si vous souhaitez un site web réactif, je maîtrise aussi certains framework comme React et Vue.',
-      icon: CursorClickIcon,
+      icon: CursorArrowRaysIcon,
     },
     {
       name: 'WordPress',
       description: 'Vous souhaitez un site sur mesure clé en main développé sous WordPress ? Je peux vous aider.',
-      icon: GlobeIcon,
+      icon: GlobeAltIcon,
     },
   ]
 
