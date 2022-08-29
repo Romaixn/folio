@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Head from 'next/head'
 import Layout from '@/components/Layout'
 import Notification from '@/components/Notification'
-import { MailIcon } from '@heroicons/react/outline'
+import { EnvelopeIcon } from '@heroicons/react/24/outline'
 
 export default function Contact() {
   const [notification, setNotification] = useState(null)
@@ -238,7 +238,7 @@ export default function Contact() {
                         <span className="sr-only">Email</span>
                       </dt>
                       <dd className="flex text-base text-red-50">
-                        <MailIcon
+                        <EnvelopeIcon
                           className="h-6 w-6 flex-shrink-0 text-red-200"
                           aria-hidden="true"
                         />
