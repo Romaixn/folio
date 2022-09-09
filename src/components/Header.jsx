@@ -105,7 +105,7 @@ export default function Header() {
               <Link href="/" aria-label="Accueil" title="Accueil">
                 <Logo className="h-10 w-auto" />
               </Link>
-              <div className="hidden md:flex md:gap-x-6">
+              <div className="hidden md:flex md:gap-10">
                 <NavLinks />
               </div>
             </div>
