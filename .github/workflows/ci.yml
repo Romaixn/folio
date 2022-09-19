@@ -10,36 +10,8 @@ permissions:
   contents: write
 
 jobs:
-  build:
-    name: 'Build 📦'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Next cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            **/.next
-          key: next-cache
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-          cache: 'npm'
-      - run: npm install
-        name: Install dependencies
-      - run: npm run lint
-        name: Run lint
-      - run: npm run build
-        name: Build Next output
-      - uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: ./.next
-
   dependabot:
     name: 'Dependabot 🤖'
-    needs: [build]
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
     steps:
