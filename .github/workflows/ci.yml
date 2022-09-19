@@ -1,9 +1,6 @@
 name: Continous Integration
 
 on:
-  push:
-    branches:
-      - 'source'
   pull_request:
 
 permissions:
