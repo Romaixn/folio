@@ -18,8 +18,8 @@
     "autoprefixer": "^10.4.11",
     "clsx": "^1.2.0",
     "date-fns": "^2.29.3",
-    "framer-motion": "^7.3.5",
-    "next": "12.3.0",
+    "framer-motion": "^7.3.6",
+    "next": "12.3.1",
     "next-sitemap": "^3.1.22",
     "plaiceholder": "^2.5.0",
     "postcss": "^8.4.16",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "eslint": "8.23.1",
-    "eslint-config-next": "12.3.0",
+    "eslint-config-next": "12.3.1",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13"
   }
