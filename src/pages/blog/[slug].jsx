@@ -42,7 +42,7 @@ export default function Post({ post }) {
         )}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@Romaixn" />
-        <meta name="twitter:site" content="rherault.fr" />
+        <meta name="twitter:site" content="@Romaixn" />
         <meta name="twitter:title" content={`${post?.title} - Romain Herault`} />
         <meta name="twitter:description" content={cleanExcerpt} />
       </Head>
