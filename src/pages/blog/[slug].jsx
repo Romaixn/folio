@@ -29,6 +29,22 @@ export default function Post({ post }) {
         <meta name="og:type" content="article" />
         <meta name="og:site_name" content="rherault" />
         <meta name="og:description" content={cleanExcerpt} />
+        <meta property="og:locale" content="fr-FR" />
+        <meta property="article:published_time" content={post?.date} />
+        {post?.featuredImage?.node && (
+            <>
+            <meta property="og:image" content={post?.featuredImage?.node.sourceUrl} />
+            <meta property="og:image:width" content={post?.featuredImage?.node.mediaDetails.width} />
+            <meta property="og:image:height" content={post?.featuredImage?.node.mediaDetails.height} />
+            <meta property="og:image:type" content={post?.featuredImage?.node.mimeType} />
+            <meta name="twitter:image" content={post?.featuredImage?.node.sourceUrl} />
+            </>
+        )}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content="@Romaixn" />
+        <meta name="twitter:site" content="rherault.fr" />
+        <meta name="twitter:title" content={`${post?.title} - Romain Herault`} />
+        <meta name="twitter:description" content={cleanExcerpt} />
       </Head>
       <div className="relative overflow-hidden bg-white py-8 sm:py-16">
         <div
