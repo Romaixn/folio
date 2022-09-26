@@ -120,6 +120,16 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
       excerpt
       slug
       date
+      featuredImage {
+        node {
+            mediaDetails {
+                width
+                height
+            }
+            sourceUrl
+            mimeType
+        }
+      }
       categories {
         edges {
           node {
