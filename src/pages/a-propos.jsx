@@ -153,6 +153,9 @@ export default function About() {
                       faire de la <strong>veille technologique</strong> et la
                       partager via mon blog ou ma newsletter.
                     </p>
+                    <p>
+                        N'hésitez pas à me contacter pour toute demande !
+                    </p>
                   </div>
                 </div>
                 <div className="mt-8 inline-flex rounded-md shadow">
