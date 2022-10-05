@@ -148,10 +148,6 @@ export default function About() {
                       <li>Formation</li>
                     </ol>
                     <p>
-                      Actuellement en poste de développeur web backend chez{' '}
-                      <a href="https://agence-ewill.com">Ewill</a>, agence web.
-                    </p>
-                    <p>
                       Ce portfolio retrace mes{' '}
                       <strong>découvertes et expériences</strong>. J'apprécie
                       faire de la <strong>veille technologique</strong> et la
