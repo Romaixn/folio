@@ -70,7 +70,7 @@ export default function Example() {
           ))}
         </div>
         <p className="mt-8 text-center text-base text-gray-400">
-          &copy; 2022 Romain Herault. Tout droit réservé.
+          &copy; 2022 <a rel="me" href="https://phpc.social/@rherault">Romain Herault</a>. Tout droit réservé.
         </p>
       </Container>
     </footer>
