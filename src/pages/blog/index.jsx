@@ -65,7 +65,7 @@ export default function Blog({ posts: { edges } }) {
             </h2>
             <div className="mt-3 sm:mt-4 lg:grid lg:grid-cols-2 lg:items-center lg:gap-5">
               <p className="text-xl text-gray-500">
-                Inscris-toi pour recevoir ma veille technologique, toutes les
+                Inscris-toi pour recevoir ma <a class="text-red-600" href="https://www.getrevue.co/profile/rherault" target="_blank" rel="noopener noreferrer">veille technologique</a>, toutes les
                 semaines et t'améliorer en tant que développeur.
               </p>
               <form className="mt-6 flex flex-col sm:flex-row lg:mt-0 lg:justify-end" onSubmit={submitNewsletter}>
