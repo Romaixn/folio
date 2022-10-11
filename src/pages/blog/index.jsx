@@ -68,14 +68,14 @@ export default function Blog({ posts: { edges } }) {
                 Inscris-toi pour recevoir ma <a class="text-red-600" href="https://www.getrevue.co/profile/rherault" target="_blank" rel="noopener noreferrer">veille technologique</a>, toutes les
                 semaines et t'améliorer en tant que développeur.
               </p>
-              <form className="mt-6 flex flex-col sm:flex-row lg:mt-0 lg:justify-end" onSubmit={submitNewsletter}>
+              <form className="mt-6 flex flex-col sm:flex-row lg:mt-0 lg:justify-end" action="https://www.getrevue.co/profile/rherault/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
                 <div>
-                  <label htmlFor="email" className="sr-only">
+                  <label htmlFor="member_email" className="sr-only">
                     Adresse email
                   </label>
                   <input
-                    id="email"
-                    name="email"
+                    id="member_email"
+                    name="member[email]"
                     type="email"
                     autoComplete="email"
                     required
