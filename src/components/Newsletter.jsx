@@ -49,13 +49,13 @@ export default function Newsletter() {
             </p>
           </div>
           <div className="mt-12 sm:w-full sm:max-w-md lg:mt-0 lg:ml-8 lg:flex-1">
-            <form className="sm:flex" onSubmit={submitNewsletter}>
-              <label htmlFor="email" className="sr-only">
+            <form className="sm:flex" action="https://www.getrevue.co/profile/rherault/add_subscriber" method="post" name="revue-form" target="_blank">
+              <label htmlFor="member_email" className="sr-only">
                 Adresse email
               </label>
               <input
-                id="email"
-                name="email"
+                id="member_email"
+                name="member[email]"
                 type="email"
                 autoComplete="email"
                 required
