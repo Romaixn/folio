@@ -20,7 +20,7 @@
     "date-fns": "^2.29.3",
     "framer-motion": "^7.5.3",
     "next": "12.3.1",
-    "next-sitemap": "^3.1.27",
+    "next-sitemap": "^3.1.28",
     "plaiceholder": "^2.5.0",
     "postcss": "^8.4.18",
     "react": "18.2.0",
