@@ -14,7 +14,7 @@ export default function Confirmation() {
             <Link href="/">
               <a className="inline-flex">
                 <span className="sr-only">rherault</span>
-                <Logo class="h-12 w-auto" />
+                <Logo className="h-12 w-auto" />
               </a>
             </Link>
           </div>
