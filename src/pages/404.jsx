@@ -15,7 +15,7 @@ export default function Custom404() {
                 src={Background}
                 alt="Camping car (référence évidente à Breaking Bad)"
                 layout="fill"
-                objectFit='cover'
+                objectfit='cover'
                 objectPosition={'bottom'}
                 placeholder='blur'
             />
