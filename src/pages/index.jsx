@@ -109,19 +109,24 @@ function SocialLink({ icon: Icon, ...props }) {
 function Newsletter() {
   return (
     <form
-      action="/thank-you"
+      action="https://www.getrevue.co/profile/rherault/add_subscriber"
+      method="post"
       className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+      target="_blank"
     >
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <MailIcon className="h-6 w-6 flex-none" />
         <span className="ml-3">Hebdo rherault</span>
       </h2>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Get notified when I publish something new, and unsubscribe at any time.
+        Sign up to receive my technology watch, every week and improve yourself as a developer.
       </p>
       <div className="mt-6 flex">
         <input
+          id="member_email"
+          name="member[email]"
           type="email"
+          autoComplete="email"
           placeholder="Email address"
           aria-label="Email address"
           required
@@ -196,7 +201,7 @@ function Resume() {
           </li>
         ))}
       </ol>
-      <Button href="#" variant="secondary" className="group mt-6 w-full">
+      <Button href="https://drive.google.com/file/d/1emYTRvkZxPTfpHnqWZRwBdPbDU9_AnEQ/view?usp=share_link" target="_blank" rel="noopener noreferrer" variant="secondary" className="group mt-6 w-full">
         Download CV
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
@@ -246,13 +251,10 @@ export default function Home({ articles }) {
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-             Web developer and amateur 3D artist.
+             Web developer, software craftsmanship and animals lover.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I’m Romain, a software designer and entrepreneur based in New York
-            City. I’m the founder and CEO of Planetaria, where we develop
-            technologies that empower regular people to explore space on their
-            own terms.
+            I’m Romain, a backend web developer based in France.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
