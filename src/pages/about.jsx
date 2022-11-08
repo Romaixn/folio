@@ -65,16 +65,16 @@ export default function About() {
             </h1>
             <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
               <p>
-                Hey 👋🏻 I'm Romain, passionate about new technologies and their ability to improve our lives.
+                Hey 👋🏻 I’m Romain, passionate about new technologies and their ability to improve our lives.
               </p>
               <p>
-                I'm a backend oriented web developer but "jack of all trades" (hence the fullstack)!
+                I’m a backend oriented web developer !
                 I especially enjoy Symfony and WordPress combined with Tailwind CSS (❤️) to create beautiful and powerful sites.
               </p>
               <p>
                 Being proud of my code is a real life philosophy.
-                That's why I'm more and more interested in modern
-                code architectures and principles related to "Clean Code" (SOLID, DDD, etc..)
+                That’s why I’m more and more interested in modern
+                code architectures and principles related to Clean Code (SOLID, DDD, etc..)
               </p>
               <p>
                 This portfolio retraces my discoveries and experiences.
