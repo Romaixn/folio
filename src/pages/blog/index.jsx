@@ -1,38 +1,11 @@
-import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Date from '@/components/Date'
 import Layout from '@/components/Layout'
 import Container from '@/components/Container'
-import Notification from '@/components/Notification'
 import { getAllPosts } from '@/lib/wordpress/api'
 
 export default function Blog({ posts: { edges } }) {
-  const [notification, setNotification] = useState(null)
-  const [status, setStatus] = useState(null)
-  const [sending, setSending] = useState(false)
-
-  const submitNewsletter = async (event) => {
-    setSending(true)
-    event.preventDefault()
-
-    const email = event.target.email.value
-
-    const res = await fetch('/api/newsletter', {
-      body: JSON.stringify({ email }),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-
-    setStatus(res.status)
-    notification = await res.json()
-    setNotification(notification)
-    event.target.reset()
-    setSending(false)
-  }
-
   return (
     <Layout>
       <Head>
@@ -50,13 +23,6 @@ export default function Blog({ posts: { edges } }) {
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-gray-50"
       ></div>
-      {notification && (
-        <Notification
-          title={status === 201 ? "Merci pour votre inscription !" : "Oups, une erreur s'est produite !"}
-          status={status}
-          message={notification}
-        />
-      )}
       <Container className="bg-white pt-8 pb-20 sm:pt-16 lg:pb-28">
         <div className="relative mx-auto max-w-lg divide-y-2 divide-gray-200 lg:max-w-7xl">
           <div>
@@ -87,7 +53,6 @@ export default function Blog({ posts: { edges } }) {
                   <button
                     type="submit"
                     className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:inline-flex sm:w-auto disabled:opacity-80"
-                    {...(sending ? { disabled: true } : {})}
                   >
                     S'inscrire
                   </button>

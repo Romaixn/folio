@@ -5,7 +5,7 @@ import Notification from '@/components/Notification'
 import { EnvelopeIcon } from '@heroicons/react/24/outline'
 
 export default function Contact() {
-  const [notification, setNotification] = useState(null)
+  const [notificationMail, setNotificationMail] = useState(null)
   const [status, setStatus] = useState(null)
   const [sending, setSending] = useState(false)
 
@@ -35,8 +35,8 @@ export default function Contact() {
     })
 
     setStatus(res.status)
-    notification = await res.json()
-    setNotification(notification)
+    let response = await res.json()
+    setNotificationMail(response)
     event.target.reset()
     setSending(false)
   }
@@ -55,8 +55,8 @@ export default function Contact() {
         <meta name="og:description" content="Romain HERAULT, Développeur web Full Stack spécialisé Symfony et WordPress. N'hésitez pas à me contacter." />
       </Head>
 
-      {notification && (
-        <Notification title={status === 201 ? "Le message a bien été envoyé !": "Oups, une erreur s'est produite !"} status={status} message={notification} />
+      {notificationMail && (
+        <Notification title={status === 201 ? "Le message a bien été envoyé !": "Oups, une erreur s'est produite !"} status={status} message={notificationMail} />
       )}
       <div className="bg-white">
         <main className="overflow-hidden">
