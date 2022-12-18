@@ -1,42 +1,12 @@
 import { useState } from 'react'
 import Container from '@/components/Container'
-import Notification from '@/components/Notification'
 
 export default function Newsletter() {
-  const [notification, setNotification] = useState(null)
   const [status, setStatus] = useState(null)
   const [sending, setSending] = useState(false)
 
-  const submitNewsletter = async (event) => {
-    setSending(true)
-    event.preventDefault()
-
-    const email = event.target.email.value
-
-    const res = await fetch('/api/newsletter', {
-      body: JSON.stringify({ email }),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-
-    setStatus(res.status)
-    notification = await res.json()
-    setNotification(notification)
-    event.target.reset()
-    setSending(false)
-  }
-
   return (
     <div className="relative bg-white">
-      {notification && (
-        <Notification
-          title={status === 201 ? "Merci pour votre inscription !" : "Oups, une erreur s'est produite !"}
-          status={status}
-          message={notification}
-        />
-      )}
       <Container className="py-12 lg:py-16">
         <div className="rounded-3xl bg-red-700 py-10 px-6 sm:py-16 sm:px-12 lg:flex lg:items-center lg:p-20">
           <div className="lg:w-0 lg:flex-1">
