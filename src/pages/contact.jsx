@@ -242,7 +242,7 @@ export default function Contact() {
                           className="h-6 w-6 flex-shrink-0 text-red-200"
                           aria-hidden="true"
                         />
-                        <span className="ml-3">romain@rherault.fr</span>
+                        <span className="ml-3">romain@rherault.dev</span>
                       </dd>
                     </dl>
                     <ul role="list" className="mt-8 flex space-x-12">
