@@ -34,7 +34,7 @@ export default function Blog({ posts: { edges } }) {
                 Inscris-toi pour recevoir ma <a className="text-red-600" href="https://rherault.substack.com" target="_blank" rel="noopener noreferrer">veille technologique</a>, toutes les
                 semaines et t'améliorer en tant que développeur.
               </p>
-              <form className="mt-6 flex flex-col sm:flex-row lg:mt-0 lg:justify-end" action="https://rherault.substack.com/" method="post" id="revue-form" name="newsletter-form"  target="_blank">
+              <form className="mt-6 flex flex-col sm:flex-row lg:mt-0 lg:justify-end" action="https://rherault.substack.com/" method="get" id="revue-form" name="newsletter-form"  target="_blank">
                 <div>
                   <label htmlFor="member_email" className="sr-only">
                     Adresse email
