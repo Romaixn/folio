@@ -19,7 +19,7 @@ export default function Newsletter() {
             </p>
           </div>
           <div className="mt-12 sm:w-full sm:max-w-md lg:mt-0 lg:ml-8 lg:flex-1">
-            <form className="sm:flex" action="https://rherault.substack.com/" method="post" name="newsletter-form" target="_blank">
+            <form className="sm:flex" action="https://rherault.substack.com/" method="get" name="newsletter-form" target="_blank">
               <label htmlFor="member_email" className="sr-only">
                 Adresse email
               </label>
