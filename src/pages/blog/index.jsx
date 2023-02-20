@@ -34,6 +34,30 @@ export default function Blog({ posts: { edges } }) {
                 Inscris-toi pour recevoir ma <a className="text-red-600" href="https://rherault.substack.com" target="_blank" rel="noopener noreferrer">veille technologique</a>, toutes les
                 semaines et t'améliorer en tant que développeur.
               </p>
+              <form className="mt-6 flex flex-col sm:flex-row lg:mt-0 lg:justify-end" action="https://rherault.substack.com/" method="post" id="revue-form" name="newsletter-form"  target="_blank">
+                <div>
+                  <label htmlFor="member_email" className="sr-only">
+                    Adresse email
+                  </label>
+                  <input
+                    id="member_email"
+                    name="member[email]"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="w-full appearance-none rounded-md border border-gray-300 bg-white px-4 py-2 text-base text-gray-900 placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-red-500 lg:max-w-xs"
+                    placeholder="Adresse email"
+                  />
+                </div>
+                <div className="mt-2 flex w-full flex-shrink-0 rounded-md shadow-sm sm:mt-0 sm:ml-3 sm:inline-flex sm:w-auto">
+                  <button
+                    type="submit"
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:inline-flex sm:w-auto disabled:opacity-80"
+                  >
+                    S'inscrire
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
           <div className="mt-6 grid gap-16 pt-10 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
