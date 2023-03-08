@@ -8,7 +8,6 @@ export default function Document(props) {
       <Head />
       <body className="h-full">
         <Main />
-        <script src="https://onestla.tech/widget-engreve/widget.js" async></script>
         <NextScript />
       </body>
     </Html>
