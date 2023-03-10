@@ -19,7 +19,7 @@
     "autoprefixer": "^10.4.13",
     "clsx": "^1.2.0",
     "date-fns": "^2.29.3",
-    "framer-motion": "^10.2.3",
+    "framer-motion": "^10.2.4",
     "next": "^13.2.3",
     "next-sitemap": "^4.0.5",
     "plaiceholder": "^2.5.0",
