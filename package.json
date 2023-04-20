@@ -23,7 +23,7 @@
     "next": "^13.3.0",
     "next-sitemap": "^4.0.7",
     "plaiceholder": "^2.5.0",
-    "postcss": "^8.4.21",
+    "postcss": "^8.4.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sharp": "^0.32.0",
