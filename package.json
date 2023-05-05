@@ -20,7 +20,7 @@
     "clsx": "^1.2.0",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.12.7",
-    "next": "^13.3.4",
+    "next": "^13.4.1",
     "next-sitemap": "^4.0.9",
     "plaiceholder": "^2.5.0",
     "postcss": "^8.4.23",
