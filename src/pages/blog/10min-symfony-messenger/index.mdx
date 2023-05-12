@@ -55,14 +55,10 @@ Un transport est un outil tel que Redis, RabbitMQ et même **Doctrine**. En asyn
 On peut donc reprendre les étapes précédentes et y rajouter l'asynchrone :
 
 1. Un **publisher** (controller, service, command, …) **dispatche** un message dans le bus de message,
-
-3. Le message est envoyé via un **transport** à une file d'attente (**Adapters**), aussi appelé **système de queue** (Redis, RabbitMQ, Doctrine, …),
-
-5. Un **worker** va chercher en temps réel les messages depuis le système de queue via le transport,
-
-7. Il re-dispatche le message dans le bus,
-
-9. Le message est consommé par un **handler**.
+2. Le message est envoyé via un **transport** à une file d'attente (**Adapters**), aussi appelé **système de queue** (Redis, RabbitMQ, Doctrine, …),
+3. Un **worker** va chercher en temps réel les messages depuis le système de queue via le transport,
+4. Il re-dispatche le message dans le bus,
+5. Le message est consommé par un **handler**.
 
 ## Mise en application
 

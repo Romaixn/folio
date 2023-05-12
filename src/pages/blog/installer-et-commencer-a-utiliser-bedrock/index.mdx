@@ -31,19 +31,14 @@ Ensuite, il faudra renseigner quelques détails dans le fichier .env de notre pr
 Les informations de la base de données :
 
 - _DB\_NAME_ : Son nom
-
 - _DB\_USER_ : Son utilisateur
-
 - _DB\_PASSWORD_ : Le mot de passe de l'utilisateur
-
 - _DB\_HOST_ : Si la base de données est sur un serveur distant, sinon par défaut c'est le fameux _127.0.0.1_
 
 Ensuite, les informations propres à **WordPress** :
 
 - _WP\_ENV_ : Permet de choisir entre **development**, **staging** ou **production**. Il correspond aux différents environnements possibles, comme décrit dans le premier article.
-
 - WP\_HOME : L'URL de votre site web, si vous développez en local, vous pouvez simplement renseigner localhost (http://localhost:8000, par exemple)
-
 - WP\_SITEURL : L'URL vers les fichiers propres à WordPress, puisque Bedrock sépare bien les fichiers systèmes du reste, cette variable est nécessaire. Vous pouvez définir `${WP_HOME}/wp` par exemple.
 
 Et enfin, les variables de **salts** utiliser pour hacher les mots de passes (**\+ sécurité**). Vous pouvez les générer ici : [https://roots.io/salts.html](https://roots.io/salts.html) et copier-coller l'intégralité des variables en dessous de "Env Format".

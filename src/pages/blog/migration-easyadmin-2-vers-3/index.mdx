@@ -17,17 +17,23 @@ Aller, on passe à l'installation.
 
 En suivant la [documentation officielle](https://symfony.com/doc/master/bundles/EasyAdminBundle/upgrade.html), il y a plusieurs étapes à réaliser et qui sont censées nous permettre de migrer facilement vers EasyAdmin 3 :
 
+```bash
 cd your-project/
 php bin/console make:admin:migration
+```
 
 Cette commande va créer un fichier de backup à l'endroit que vous souhaitez et préparer la mise à jour.  
 Ensuite, dans le fichier composer.json il faut mettre à jour le paquet **easy-admin-bundle** à 3.0 :
 
+```json
 "easycorp/easyadmin-bundle": "^3.0",
+```
 
-et enfin faire : 
+et enfin faire :
 
+```bash
 composer update
+```
 
 Personnellement, à cette étape j'avais l'erreur suivante :
 
@@ -37,7 +43,9 @@ Après de nombreuses recherches, j'ai découvert que c'était à cause d'un fich
 
 Ensuite, si tout se passe bien, vous pouvez relancer la fameuse commande :
 
+```bash
 php bin/console make:admin:migration
+```
 
 Cette fois-ci, on va vous demander de renseigner quelques renseignements, vous avez juste à appuyer sur entrer à chaque fois si la configuration par défaut vous va.
 
@@ -64,7 +72,7 @@ On va maintenant voir ensemble quelques problèmes que j'ai **personnellement** 
 Si vous aviez un éditeur WYSIWYG dans une de vos entités, il va falloir faire quelques modifications. En effet, lors de la migration automatique nos champs "text\_editor" sont passés à "textarea", ce qui n'a pas du tout le même effet.  
 Il faut donc faire les changements suivants pour retrouver notre bon vieux éditeur : 
 
-```
+```php
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 ...
 
@@ -76,7 +84,7 @@ $content = TextEditorField::new('content');
 Les boolean ne se stylisent pas bien avec la migration automatique car ils sont notés comme 'Field'.  
 Il faut donc faire les changements suivants :
 
-```
+```php
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 ...
 
@@ -88,7 +96,7 @@ $published = BooleanField::new('published');
 Pour ceux qui utiliseraient VichUploader Bundle,  l'upgrade a tout pété. Mais heureusement, c'est assez simple. (même plus simple qu'avant)  
 Du coup pour faire fonctionner ce bundle avec Easy Admin 3, il suffit de changer le field en "ImageField" et d'utiliser la fonction setFormType() pour bien dire à EasyAdmin que c'est une "VichImageType" :
 
-```
+```php
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 ...
@@ -97,9 +105,9 @@ $imageFile = ImageField::new('imageFile')
     ->setFormType(VichImageType::class);
 ```
 
-Et pour avoir l'aperçu dans "l'index" de l'entité, il faut  utiliser :
+Et pour avoir l'aperçu dans "l'index" de l'entité, il faut utiliser :
 
-```
+```php
 $image = ImageField::new('image')
     ->setBasePath(
         $this->getParameter('app.path.images')
@@ -108,7 +116,7 @@ $image = ImageField::new('image')
 
 Si vous avez un paramètre définit dans votre service.yaml ou autre comme moi, vous pouvez utiliser la fonction getParameter(). Autrement, vous pouvez directement entrer votre chemin dans la fonction setBasePath() de ImageField de cette façon : 
 
-```
+```php
 $image = ImageField::new('image')
     ->setBasePath('/uploads/images/');
 ```

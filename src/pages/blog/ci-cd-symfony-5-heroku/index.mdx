@@ -17,11 +17,8 @@ Heroku est une _"platform as a Service"_, c'est une application cloud permettant
 Voilà comment cette plateforme fonctionne résumée simplement :
 
 - Tu développes ton application et tu l’envoies sur **GitHub** (ou **GitLab**, comme tu veux).
-
 - Lorsque tu as envoyé ton code, Heroku te construit automatiquement un serveur avec ton code. C'est-à-dire que s'il détecte que tu utilises PHP (grâce au composer.lock), il va te construire un serveur avec PHP. Ce fonctionnement marche aussi avec Node, Python ou autres.
-
 - Ensuite, ton application Heroku est (sûrement) reliée à une base de données (ou autres) via des **addons**.
-
 - Et enfin, Heroku va te donner une URL pour pouvoir consulter ton projet.
 
 C'est aussi simple que ça, tu pus, il déploie. Et ce, **automatiquement**.
@@ -55,9 +52,7 @@ Ensuite, tu peux choisir ta méthode de déploiement.
 Tu as le choix entre :
 
 - **Heroku Git**, correspondant au **Heroku Cli**
-
 - **GitHub**, le plus simple à mettre en place, très automatique.
-
 - **Container Registry**, correspondant au Heroku Cli mais pour les projets avec un environnement **Docker**. Cette méthode ne sera pas expliquée dans cet article, ne l'ayant jamais utilisé.
 
 #### Projet hébergé sur GitHub
@@ -76,7 +71,7 @@ GitLab possède son propre fonctionnement grâce au fichier .gitlab-ci.
 
 Commence par créer ce fameux fichier _.gitlab-ci.yml_ à la racine de ton projet. Dans celui-ci entre les lignes suivantes :
 
-```
+```yaml
 image : ruby:latest
 
 production:
@@ -97,7 +92,6 @@ Ce bout de code sera exécuté à chaque push sur la branche _master_. Celui-ci 
 Pour que celui-ci fonctionne, il faut ajouter 2 variables dans ton projet GitLab. Rends-toi dans Settings > CI / CD > Variables pour ajouter ces deux entrées :
 
 - `HEROKU_APP`, le nom de ton application
-
 - `HEROKU_API_KEY`, la clé API de ton compte. Tu peux la retrouver dans _[/account](https://dashboard.heroku.com/account)_, tout en bas.
 
 Grâce à ces variables, **dpl** va savoir vers quelle application déployer et comment communiquer avec Heroku grâce à son API.
@@ -119,7 +113,6 @@ En cliquant sur le bouton, tu vas pouvoir rentrer des variables comme bon te sem
 Il y a deux variables absolument nécessaires pour **Symfony** :
 
 - APP\_ENV : Ici, il faut mettre "prod"
-
 - APP\_SECRET (optionnel) : Pour plus de sécurité, tu peux changer ce paramètre. Tu peux le générer avec PHP ou alors te rendre sur [ce générateur](http://nux.net/secret) et copier/coller la suite de caractères.
 
 ### Ajout de la base de données
@@ -131,7 +124,6 @@ Pour en ajouter une, il faut se rendre dans l'onglet "Resources", et tout en bas
 Une fois dans cette section, cliques sur la barre de recherche "Quickly add add-ons from Elements" et renseigne :
 
 - **ClearDB MySQL** : Si tu utilises une base de données MySQL
-
 - **Heroku Postgres** : Si tu utilises une base de données PostgreSQL
 
 Pour ces deux addons, une version gratuite est disponible, sélectionne-la.
@@ -144,7 +136,7 @@ Lors du développement, il est possible que tu aies besoin de faire des migratio
 
 Il faut cliquer sur le bouton "More" (en haut à droite) et "Run console". Une boîte de dialogue va s'ouvrir, il te suffit de renseigner la commande que tu souhaites. Dans notre cas :
 
-```
+```bash
 php bin/console doctrine:migrations:migrate
 ```
 
@@ -166,7 +158,7 @@ Et voilà, à chaque builds, Heroku va maintenant installer les dépendances con
 
 Pour afficher les logs de ton application (vu qu'elle est en mode **production**), il faut changer la configuration de **monolog**, le bundle de logs de Symfony. Il faut donc modifier le contenu du fichier `config/packages/prod/monolog.yaml` comme suit :
 
-```
+```yaml
 monolog:
     handlers:
         main:

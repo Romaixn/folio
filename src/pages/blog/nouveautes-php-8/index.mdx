@@ -16,7 +16,7 @@ export default (props) => <ArticleLayout meta={meta} {...props} />
 
 Les constructeurs sont maintenant simplifiés, plus besoin de définir toutes les variables et de les redéfinir dans le constructeur :
 
-```
+```php
 class User
 {
   public function __construct(public string $name, public string $surname)
@@ -28,7 +28,7 @@ class User
 
 En ajoutant le mot clé "_public_" devant chaque paramètre, la classe va générer les propriétés par elle même, accessible comme d'habitude :
 
-```
+```php
 $user = new User('foo', 'bar');
 echo($user->name); // Ici, va afficher 'foo'.
 ```
@@ -37,7 +37,7 @@ echo($user->name); // Ici, va afficher 'foo'.
 
 Dans une fonction, il est maintenant possible de définir plusieurs types pour les paramètres ou les valeurs de retours :
 
-```
+```php
 public function getValue(int|float $value) : int|float
 {
     return $value;
@@ -50,7 +50,7 @@ Cette fonction, prendra un paramètre soit un _integer_ soit un _float_ et gén�
 
 Si vous avez déjà fait du **Symfony**, vous devez connaître les _annotations_, elles ressembles à ça :
 
-```
+```php
 /**
  * @Route("/blog", name="blog_list")
 */
@@ -63,7 +63,7 @@ public function index()
 Sous **PHP 8**, cette syntaxe a été remplacé par des _#\[\]_ (appelés **attributs**).   
 Le code précedant devrait donc donner :
 
-```
+```php
 #[Route("/blog", name:"blog_list")]
 public function index()
 {
@@ -75,7 +75,7 @@ public function index()
 
 Il est maintenant possible de savoir si une chaîne de caractère en contient une autre grace à la fonction _str\_contains()_ :
 
-```
+```php
 str_contains('Hello', 'Hello World!'); // Renvoie true
 ```
 
@@ -83,7 +83,7 @@ str_contains('Hello', 'Hello World!'); // Renvoie true
 
 Deux nouvelles fonctions _str\_starts\_with()_ et _str\_ends\_with()_ :
 
-```
+```php
 str_starts_with('He', 'Hello World!'); // Renvoie true
 str_ends_with('rld!', 'Hello World!'); // Renvoie true
 ```

@@ -16,7 +16,7 @@ Aujourd'hui, nous allons découvrir ensemble le composant **Workflow** de **Symf
 
 L'objectif de ce composant est de reproduire des **"machines à état"** (ou **automate**) qui correspond à un modèle de mathématique.
 
-Évidemment, dit comme ça, le composant paraît hypercompliqué. Mais une image vaut 1000 mots :
+Évidemment, dit comme ça, le composant paraît hyper compliqué. Mais une image vaut 1000 mots :
 
 Explication du Workflow du site symfony.com
 
@@ -41,10 +41,8 @@ Sur mon portfolio j'ai une entité `Projet` qui contient un champ `isPublished`,
 Le **cycle de vie** de mon projet se déroule ainsi :
 
 1. Création du projet, ajout du `state` "_draft_" (brouillon)
-
-3. Si isPublished est à true, alors le code va aller **optimiser** l'image ajoutée (recadrement et génération du "blur" pour l'affichage en front), une fois cela fait, l'entité va passer à l'étape suivante : `ready`
-
-5. Enfin, le projet passe dans l'état `published`. (Je n'ai plus qu'à récupérer uniquement les projets avec cet état en front pour l'affichage.)
+2. Si isPublished est à true, alors le code va aller **optimiser** l'image ajoutée (recadrement et génération du "blur" pour l'affichage en front), une fois cela fait, l'entité va passer à l'étape suivante : `ready`
+3. Enfin, le projet passe dans l'état `published`. (Je n'ai plus qu'à récupérer uniquement les projets avec cet état en front pour l'affichage.)
 
 Voici un schéma de mon cycle de vie :
 
