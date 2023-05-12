@@ -1,0 +1,93 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Les avantages de Bedrock comparé à WordPress",
+    date: "2021-01-04",
+    description: 'Description',
+    categories: ['WordPress'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Dans cet article nous allons découvrir ensemble le _boilerplate_ **Bedrock** ansi que ses nombreux **avantages** et pourquoi privilégier ce fonctionnement à du _Vanilla_ WordPress (installation WordPress classique).
+
+Pour info, j'ai récemment migré le blog sous WordPress pour des raisons de simplicité d'écriture et de gestion de contenu, j'ai donc pu tester cette **stack** du développement à la production.
+
+## Mais c'est quoi "Bedrock" ?
+
+> WordPress boilerplate with modern development tools, easier configuration, and an improved folder structure
+> 
+> [Site officiel](https://roots.io/bedrock/)
+
+Tout d'abord, expliquons les bases : Bedrock est une **stack** (**boilerplate**) pour WordPress. C'est-à-dire qu'il change complètement l'organisation d'un projet. Il ajoute un développement plus moderne, et une toute nouvelle **architecture**. Il a été développé par **[Roots](https://roots.io/)**, qui ont déjà développé de nombreux outils liés à WordPress et autour de **Bedrock**. Leur but est de fournir des outils permettant la création de site WordPress plus rapide et plus agréable.
+
+Maintenant, passons aux raisons pour lesquelles ce site tourne sous WordPress avec la **stack Bedrock** et pourquoi vous devriez en faire autant.
+
+## Bedrock pour... la sécurité
+
+Le serveur web pointe vers le dossier _web/_, il préserve donc les fichiers de configurations (fichier _.env_ et le dossier config/ où Bedrock gère les logs à la base de données, etc..)
+
+## Maintenabilité
+
+Comme nous l'avons vu plus tôt, Bedrock offre une toute nouvelle **architecture** d'un projet WordPress, nos fichiers sont maintenant dans _/app_ (correspondant à l'ancien _wp-content/_), tandis que les fichiers propres au CMS sont dans le dossier _/wp_, tout ce que l'on peut modifier est dans _/app_.
+
+## Des mises à jour simplifiées
+
+De l'installation aux mises à jour : Tout se passe avec **composer**. Ce système simplifie énormément le **versionnage** ainsi que le **déploiement**. (Nous reviendrons sur ces deux points plus tard)
+
+Toutes les versions des plugins sont **mises à niveaux** entre les différents environnements, du développement à la production. Mais aussi entre les différents développeurs.
+
+Un simple `composer upgrade` et tout nos plugins se mettent à jour, sans avoir à passer dans l'administration de WordPress.
+
+## Simplicité
+
+Il est très simple de migrer d'un _Vanilla_ WordPress à Bedrock. En effet, il n'y a pas besoin d'un thème avec une architecture bien particulière comme certains **framework** comme [Themosis](https://framework.themosis.com/), n'importe quel thème/plugin fonctionne.
+
+Vous pouvez donc simplement réinstaller WordPress avec Bedrock et installer avec composer les plugins dont vous avez besoin ainsi que votre thème.
+
+## Protection de la production
+
+Par défaut, Bedrock désactive l'ajout de plugins et les mises à jour lorsque l'on passe le projet en production. (Grâce au fichier .env et sa variable `WP_ENV`)
+
+Il est donc impossible pour les clients/utilisateurs de casser la production avec une installation ou une désinstallation faites "sans faire exprès" (vous voyez de quoi je parle).
+
+Puisque ce framework est géré avec composer, les mises à jour sont bloquées en mode production mais peuvent être réalisées en CLI grâce à composer. Vous pouvez très bien effectuer un **cron** qui mettra à jour votre WordPress toutes les semaines ou autres.
+
+## Versionnage
+
+Le versionnage d'un projet est grandement **simplifié et sécurisé**. Toutes les variables sont stockés dans le fichier _.env_ (à ne pas ajouter sur git) et l'intégralité des dépendances de l'application (plugins/thèmes) sont gérées avec composer.
+
+Il est donc bien plus facile pour un nouveau développeur de récupérer le projet et de commencer à travailler avec les mêmes plugins et les mêmes versions que tout le monde.
+
+## Facilité de déploiement
+
+Le **déploiement** est grandement simplifié, encore une fois, grâce à **composer**.
+
+Un simple `composer install` et tout les plugins et thèmes sont ajouter sur le serveur, aux mêmes versions que pendant le développement, grâce au fichier _composer.json_ et _composer.lock_. Pas besoin d'un grand dump de la base de données pour tout ça.
+
+Le fichier _.env_ permet aussi d'avoir plusieurs **environnements** :
+
+- **development** pour le développement du site,
+
+- **staging** pour les tests (une sorte de "pré-prod"),
+
+- **production** pour la production.
+
+Le fonctionnement de Bedrock change selon ses environnements, par exemple, en développement, le site est "non indexé", il n'apparaîtra pas sur Google. Tandis qu'en production, les mises à jour sont bloquées, l'installation et la désinstallation de plugins aussi, etc..
+
+### Trellis
+
+En complément, **Roots** ont développé un outil nommé **[Trellis](https://roots.io/trellis/)**, et permettant de faciliter le développement en proposant différentes technologies allant du développement au déploiement.
+
+Pendant le développement, cet outil propose **[Vagrant](https://www.vagrantup.com/)**, un logiciel de création d'environnement virtuel autour de **VirtualBox** et ce dans le but d'harmoniser les différents environnements des développeurs. Grâce à Vagrant, tout le monde à la même version de PHP, Apache/Nginx, etc..
+
+Lors du déploiement sur un serveur, c'est **[Ansible](https://www.ansible.com/)** qui est utilisé. Cet outil permet de créer un serveur tout entier à partir de fichier de configuration. Allant de l'installation des différents paquets (PHP, Mysql, Apache) à la configuration de ceux-ci.
+
+Une simple commande et le serveur est **déployé** avec les mêmes versions que lors du développement avec **Vagrant** et le site est prêt à recevoir des visiteurs.
+
+## Pour conclure : Faut-il utiliser Bedrock ?
+
+Pour finir, je dirais que Bedrock offre de nombreux avantages comparés à une installation classique de WordPress. Je ne vois pas pourquoi ne pas commencer à l'utiliser, il y a, pour moi, aucun inconvénient.
+
+Si vous avez été convaincu par cette solution, n'hésitez pas à visiter le [site officiel](https://roots.io/bedrock/) ou consulter mon article sur **[l'installation et l'utilisation de Bedrock](https://blog.rherault.fr/installer-et-commencer-a-utiliser-bedrock/)** afin de tester par vous-même !

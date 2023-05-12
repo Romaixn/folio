@@ -1,0 +1,27 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Bloquer les pubs sous Android",
+    date: "2020-05-21",
+    description: 'Description',
+    categories: ['Tutos'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+## Un bloqueur de pub sur Android ?
+
+_Cette technique n'est disponible que pour Android Pie (9.0) et supérieur (Android 10 aussi)_
+
+Je vais vous partager ici une petite technique pour bloquer (presque) toutes les pubs sur votre Android 9. 
+Dans les "Paramètres" de votre smartphone, rendez vous dans la partie "Wifi". Ensuite, tout en bas se situe l'option "DNS privé", cliquer et cocher l'option "Nom d'hôte du fournisseur DNS privé" et renseigner tout simplement : 
+
+```
+dns.adguard.com
+```
+
+## Je n'ai pas Android Pie, que faire ?
+
+Sans cette version d'Android, il est possible d'utiliser l'application **Blokada** qui permet de changer le DNS et donc de reproduire la technique expliquer plus tôt.  
+Pour télécharger Blokada, il est possible de le faire via [le site officiel](https://blokada.org/). Il est aussi disponible sur F-Droid pour ceux qui le souhaite.

@@ -1,0 +1,91 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Nouveautés PHP 8",
+    date: "2020-06-22",
+    description: 'Description',
+    categories: ['PHP', 'Veille technologique'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+**PHP 8** va sortir en alpha pour le **25 juin 2020**. Nous pouvons déjà relever quelques nouveautés intéressantes.
+
+## Simplification des constructeurs
+
+Les constructeurs sont maintenant simplifiés, plus besoin de définir toutes les variables et de les redéfinir dans le constructeur :
+
+```
+class User
+{
+  public function __construct(public string $name, public string $surname)
+  {
+
+  }
+}
+```
+
+En ajoutant le mot clé "_public_" devant chaque paramètre, la classe va générer les propriétés par elle même, accessible comme d'habitude :
+
+```
+$user = new User('foo', 'bar');
+echo($user->name); // Ici, va afficher 'foo'.
+```
+
+## Paramètres des fonctions
+
+Dans une fonction, il est maintenant possible de définir plusieurs types pour les paramètres ou les valeurs de retours :
+
+```
+public function getValue(int|float $value) : int|float
+{
+    return $value;
+}
+```
+
+Cette fonction, prendra un paramètre soit un _integer_ soit un _float_ et générera une erreur dans le cas contraire.
+
+## Les annotations (Attributs)
+
+Si vous avez déjà fait du **Symfony**, vous devez connaître les _annotations_, elles ressembles à ça :
+
+```
+/**
+ * @Route("/blog", name="blog_list")
+*/
+public function index()
+{
+  // ..
+}
+```
+
+Sous **PHP 8**, cette syntaxe a été remplacé par des _#\[\]_ (appelés **attributs**).   
+Le code précedant devrait donc donner :
+
+```
+#[Route("/blog", name:"blog_list")]
+public function index()
+{
+  // ..
+}
+```
+
+## Vérifier qu'une chaîne de caractères en contient une autre
+
+Il est maintenant possible de savoir si une chaîne de caractère en contient une autre grace à la fonction _str\_contains()_ :
+
+```
+str_contains('Hello', 'Hello World!'); // Renvoie true
+```
+
+## Vérifier qu'une chaîne de caractères commence ou termine par une autre
+
+Deux nouvelles fonctions _str\_starts\_with()_ et _str\_ends\_with()_ :
+
+```
+str_starts_with('He', 'Hello World!'); // Renvoie true
+str_ends_with('rld!', 'Hello World!'); // Renvoie true
+```
+
+**Attention**, ces dernières sont sensibles à la casse.

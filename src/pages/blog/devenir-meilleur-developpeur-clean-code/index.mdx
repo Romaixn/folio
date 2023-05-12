@@ -1,0 +1,163 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Devenir un⸱e meilleur⸱e développeur⸱euse grâce au \"Clean Code\"",
+    date: "2022-06-13",
+    description: 'Description',
+    categories: ['Clean Code'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Il y a quelque temps j'ai intégré une nouvelle entreprise dans le cadre d'une "régie", habitué aux agences web, c'est la première fois que je sortais de ce domaine.
+
+Quand j'ai découvert le code de cette entreprise, j'ai vite compris que j'étais à la ramasse en termes de **qualité de code**.
+
+Je connaissais tous les **concepts** utilisés mais je ne les appliquais pas systématiquement.
+
+Pourquoi ? Par manque de temps, des deadlines très rapprochées. (Beaucoup d'excuses, oui)
+
+**Je privilégiais la quantité à la qualité.**
+
+Et ça, c'est un gros défaut que pas mal de développeurs⸱euses (surtout junior) ont.
+
+Aujourd'hui on va parler de "**Clean Code**" et de comment l'ensemble de ces **pratiques** peuvent faire de toi un⸱e **meilleur⸱e développeur⸱euse**.
+
+## Qu'est-ce que le "Clean Code"
+
+## Son importance
+
+Au-delà du titre "putaclick", mon but est de te prouver l'importance de ces méthodologies et comment elles peuvent réellement faire de toi un⸱ meilleur⸱e développeur⸱euse.
+
+Le **Clean Code**, c'est surtout une liste (non exhaustive) de méthodologie à respecter pour faire du **code de qualité**.
+
+Un code de qualité donne énormément d'avantages (en plus de pouvoir être fier⸱e de ton code) :
+
+- Plus **maintenable**, une modification dans une base de code ne devrait pas te faire peur.
+
+- Plus **modulable/améliorable**, n'importe quel⸱le développeur⸱euse doit être en mesure d'ajouter et/ou modifier une fonctionnalité très facilement.
+
+Et faire du code de qualité s'applique bien évidemment à tous les domaines, même dans le **web** pour les "petits sites".
+
+Il ne devrait pas y avoir d'excuse pour ne pas suivre ces **[principes](#principes)**.
+
+En plus d'être bien plus agréable pour tout le monde (oui, personne n'aime développer avec du legacy), tu vas prendre un bien plus grand plaisir à développer.
+
+L'objectif est que tu deviennes **fier⸱e de ton code**.
+
+Le Clean Code c'est tout un état d'esprit, on parle de "Software Craftsmanship" (Artisan Développeur). Un manifeste existe même pour cela : [https://manifesto.softwarecraftsmanship.org/](https://manifesto.softwarecraftsmanship.org/#/fr-fr).
+
+## Pourquoi ?
+
+Si tu n'es toujours pas convaincu⸱e de l'importance d'utiliser le Clean Code, il faut revenir à la base : pourquoi le développement orienté objet à été inventé ?
+
+Est-ce que nous n'étions pas bien avec nos fichiers PHP de 1000 lignes avec tout un tas de fonctions posées comme ça sans contexte et des `includes` dans tous les sens ? (Je prends ici l'exemple du PHP puisque c'est celui que je maîtrise, mais tout cet article s'applique bien évidemment à n'importe quel langage.)
+
+Tu l'auras deviné⸱e, la programmation orientée objet a été inventée spécifiquement pour ce problème : **l'organisation**.
+
+Pouvoir organiser son code en **classe** a été une petite révolution.
+
+De là sont nées énormément de **bonnes pratiques**, acquis à force d'erreurs.
+
+En effet, avez-vous déjà été confronté à une classe de 500 lignes en soupirant parce que vous savez que ce sera long de trouver ce que vous voulez vraiment ?
+
+Beaucoup de développeur⸱euse⸱s l'ont été⸱e⸱s avant vous.
+
+Et les **principes** que nous allons voir ont été créés pour ne pas répéter les mêmes erreurs.
+
+Pour aller plus loin, certains ont inventé des **designs pattern** (**patrons de conception**) pour tout un tas de cas d'utilisation. Nous n'allons pas parler de cela aujourd'hui mais si tu veux en savoir plus je te conseille l'excellent site [refactoring.guru](https://refactoring.guru/fr) !
+
+## Les différents principes
+
+Il existe évidemment bien d'autres principes, je vais parler ici des principaux, de ceux que tout le monde devrait appliquer.
+
+### KISS (Keep It Simple, Stupid)
+
+Ce principe préconise la **simplicité**.
+
+Ne pas ajouter une **complexité non-indispensable** à une application.
+
+Un code simple est bien plus facile à modifier.
+
+> Il semble que la perfection soit atteinte non pas lorsqu'il n'y a plus rien à ajouter, mais lorsqu'il n'y a plus rien à enlever.
+
+### DRY (**Don't Repeat Yourself**)
+
+Le titre en dit long : **ne pas se répéter**.
+
+Si le fonctionnement de cette fonction doit changer, il est plus simple de la modifier à un seul endroit plutôt que de devoir chercher toutes les fonctions implémentant le même code.
+
+Attention par contre avec ce principe, il peut être bon de se répéter parfois.
+
+Lorsque les cas d'utilisations ne sont pas les mêmes, par exemple. Un produit dans un catalogue ou dans un panier utilisateur n'est pas le même, il pourrait être bon de le dupliquer dans ce cas-là.
+
+Celui-ci est à prendre avec des pincettes, si tu veux approfondir, je te conseille [cet article](https://medium.com/@nicolopigna/this-is-not-the-dry-you-are-looking-for-a316ed3f445f).
+
+### SOLID
+
+Le **principe SOLID** est le plus important de tous.
+
+#### Responsabilité unique (Single responsibility principle)
+
+Une classe, une fonction ou une méthode doit avoir une et une seule responsabilité
+
+#### Ouvert/fermé (Open/closed principle)
+
+Une entité applicative (classe, fonction, module …) doit être fermée à la modification directe mais ouverte à l'extension.
+
+#### Substitution de Liskov (Liskov substitution principle)
+
+Une instance de type T doit pouvoir être remplacée par une instance de type G, tel que G sous-type de T, sans que cela ne modifie la cohérence du programme.
+
+#### Ségrégation des interfaces (Interface segregation principle)
+
+Préférer plusieurs interfaces spécifiques pour chaque client plutôt qu'une seule interface générale
+
+#### Inversion des dépendances (Dependency inversion principle)
+
+Il faut dépendre des abstractions, pas des implémentations
+
+Si tu souhaites plus de détails concernant ce principe je te renvoie vers [l'excellent article d'alexsoyes.](https://alexsoyes.com/solid/)
+
+## Les bonnes pratiques
+
+Au-delà de ces principes, il existe aussi des **"bonnes pratiques"**.
+
+### Cohérence
+
+Être **cohérent**, toujours utiliser le même nommage dans toute son application, par exemple.
+
+Si tu utilises l'anglais à un endroit, utilise le partout.
+
+Si tu utilises du **CamelCase** pour le nommage de tes classes, utilise le partout.
+
+Utiliser des noms de variables **explicites**. Au bûcher les variables `a` / `b` / `array` / `variable`, il devrait être possible de **comprendre le code rien qu'en le lisant**.
+
+### Conventions
+
+Suivre les normes de son langage, le **PSR-12** en **PHP**, par exemple.
+
+Tous les langages ont (normalement) leurs normes, leurs "codings style".
+
+Mais les **CMS** ou **framework** en ont aussi, [exemple avec **Symfony**](https://symfony.com/doc/current/best_practices.html) ou encore **[WordPress](https://developer.wordpress.org/plugins/plugin-basics/best-practices/)**.
+
+Tu peux facilement trouver les bonnes pratiques liées à ta situation.
+
+## Mettre en pratique
+
+On arrive à la partie la plus compliquée : la **mise en pratique**.
+
+Il n'y a pas de secret, il faut **pratiquer**.
+
+Réaliser un projet de 0 et appliquer au maximum tout ce que nous avons vu.
+
+Ou alors ne pas hésiter à **refactoriser** (Retravailler une application informatique pour l'améliorer en profondeur, sans pour autant lui ajouter de nouvelles fonctions. Merci **Wikipedia).**
+
+Reprends ton code et reprends un à un tous les principes et demande-toi si tu les respectes tous.
+
+Tu peux facilement trouver tout un tas d'exemples dans le framework / CMS de ton choix. Pour ma part [cet article](https://medium.com/analytics-vidhya/dependency-injection-and-solid-principles-with-symfony-the-geocoding-example-f18ad08ed20b) m'a beaucoup aidé à appréhender SOLID dans **Symfony**.
+
+Ce qui serait encore mieux ce serait d'avoir des proches à qui demander conseils, pour savoir si tu respectes au maximum le **clean code**.
+
+Si tu remarques une erreur, ou si tu souhaites améliorer cet article, n'hésite pas à m'envoyer un message via [cette page](/contact) ou directement sur [twitter](https://twitter.com/Romaixn) !

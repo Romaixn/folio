@@ -7,7 +7,6 @@ export default function NavLinks() {
 
   return [
     ['À propos', '/a-propos'],
-    ['Projets', '/projets'],
     ['Blog', '/blog'],
     ['Contact', '/contact'],
   ].map(([label, href], index) => (

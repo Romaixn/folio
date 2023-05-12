@@ -1,0 +1,117 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Qu'est-ce que \"l'open source\" et pourquoi je devrais y contribuer ?",
+    date: "2022-09-26",
+    description: 'Description',
+    categories: ['Open Source'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+L'**Hacktoberfest** 2022 commence aujourd'hui et je pense que c'est l'occasion de comprendre ce qu'est l'**open source** et pourquoi tu devrais y **contribuer**, et donc participer à cet événement qui se déroule durant **tout le mois d'octobre**.
+
+## Qu'est-ce que l'open source
+
+Un code open source est un code **ouvert**, accessible à tous.
+
+À ne pas confondre avec la notion de "code libre".
+
+## Code libre VS code open source, quelles différences ?
+
+La notion de **code libre** est née bien avant celle de l'open source.
+
+C'est **Richard STALLMAN** qui a initié ce mouvement. La différence est grande [selon lui](https://www.gnu.org/philosophy/open-source-misses-the-point.fr.html) :
+
+> _Think of “free speech”, not “free beer”._
+> 
+> Richard STALLMAN
+
+_**Pensez à "liberté d'expression" et pas à "entrée libre"**_, la grande différence entre les deux notions résident dans cette phrase.
+
+C'est une question de liberté, pas de prix.
+
+Ce n'est pas parce que le code est accessible qu'il respecte toutes les libertés résidant dans le code libre :
+
+- Liberté de l'utiliser,
+
+- Liberté de l'étudier,
+
+- Liberté de le modifier et d'en redistribuer des copies, modifiées ou non.
+
+Ce n'est pas parce que le code est disponible pour tous qu'il prône les valeurs du libre.
+
+De nos jours de nombreuses licences sont disponibles, plus ou moins restrictives. Certaines ne respectant pas le **mouvement du libre**.
+
+GitHub a même créé un outil permettant de choisir la licence appropriée à nos besoins : [https://choosealicense.com/](https://choosealicense.com/).
+
+## Pourquoi contribuer ?
+
+Il existe une multitude de raisons de vouloir contribuer.
+
+Tu utilises un _framework_ que tu apprécies et tu souhaites **apporter ton aide à la communauté** ? Tu peux contribuer.
+
+Tu rencontres un bug dans un package que tu utilises et tu souhaites le résoudre toi même ? Tu peux contribuer
+
+Il n'existe pas de **traduction** pour ta langue ? Tu peux contribuer.
+
+Et encore bien d'autres.
+
+Le principal **avantage** à la contribution est que tu vas apporter ton aide à la communauté, que tu vas participer activement à l'amélioration d'outils open source que tu utilises quasiment tous les jours.
+
+Ensuite, en termes de compétences, tu vas pouvoir découvrir du code existant et donc t'exercer à comprendre et adapter un code que tu n'as pas écrit.
+
+Tu vas même pouvoir acquérir de nouvelles compétences.
+
+Et si tu contribues à ton framework / CMS / outil préféré tu vas bien mieux comprendre comment il fonctionne, en découvrant le **cœur** de celui-ci.
+
+En bref, il n'y a que du bon dans la contribution de projets open source, donc n'hésites pas !
+
+Maintenant si tu as envie d'apporter ta contribution, comment faire ?
+
+## Comment contribuer ?
+
+Nous avons vu qu'il existe énormément de manières différentes de contribuer :
+
+- Résoudre des **issues** (bug)
+
+- Création/Correction de documentations
+
+- Faire de la traduction
+
+- etc..
+
+Si tu es **débutant⸱e** et que tu n'as jamais fait ce genre de chose, tu peux commencer par consulter [cette page](https://www.digitalocean.com/community/tutorial_series/an-introduction-to-open-source) ou encore [celle-ci](https://opensource.guide/fr/how-to-contribute/) (en français) créée par GitHub.
+
+Ces tutoriels rapides vont t'apprendre à te servir de _**git**_ et t'expliquer de A à Z comment apporter ton aide.
+
+Pour commencer et pour découvrir le monde de l'open source et de la contribution :
+
+- [First Contributions](https://github.com/firstcontributions/first-contributions), un projet pour réaliser ta première PR (Pull Request)
+
+- [Awesome For Beginner](https://github.com/mungell/awesome-for-beginners), une liste de **projet cool pour les juniors**
+
+- [Good First Issues Github](https://github.com/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22), une liste de toutes les _issues_ notées comme "Good First Issue"
+
+Si tu sais déjà comment contribuer et te servir de git tu peux tout de suite te lancer.
+
+Mais tout d'abord, il va falloir trouver un projet sur lequel tu veux contribuer et te trouver un problème à résoudre. (C’est souvent l'étape la plus compliquée)
+
+Cela peut être le framework, outil, CMS que tu utilises quotidiennement en tant que développeur.
+
+Par exemple, si tu souhaites contribuer au projet **Symfony**, il existe une formation gratuite excellente sur [Symfony Casts](https://symfonycasts.com/screencast/contributing) ! Ensuite, il suffit de te rendre dans [l'onglet "Issues" du repository](https://github.com/symfony/symfony/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc).
+
+Si tu préfères t’entraîner sur d'autres projets, tu peux consulter ces différentes pages :
+
+- [Up For Grabs](https://up-for-grabs.net/#/)
+
+- [Projets Hacktoberfest](https://github.com/topics/hacktoberfest)
+
+- [OSWC - Projets open source](https://www.oswc.is/search-projects)
+
+Ces pages vont te donner des projets où il y a besoin d'aide et tu peux filtrer par langage, facilité de résolution, etc.
+
+Il n'y a plus qu'à trouver une issue, te l'attribuer et commencer à la résoudre !
+
+Maintenant que tu sais comment contribuer, je ne peux que te souhaiter un **Happy Hacktoberfest 2022.** ?

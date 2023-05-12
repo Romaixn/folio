@@ -1,0 +1,95 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "L'utilisation de VIM au quotidien",
+    date: "2021-02-23",
+    description: 'Description',
+    categories: ['Editeur'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Aujourd'hui, on va parler de **Vim**. Tu sais, cet éditeur pour les **vrais barbus**.
+
+## C'est quoi Vim ?
+
+Si tu n'as jamais subi la blague du "comment on quitte vim ?", alors je vais t'expliquer ce qu'est cet éditeur.
+
+C'est un éditeur de texte, complètement dans le terminal. Il est sûrement installé par défaut si tu possèdes un serveur linux quelconque.
+
+Capture d'écran de la page d'accueil de Vim
+
+Voilà à quoi ça ressemble. Ça peut faire peur, en effet. Mais son fonctionnement est tellement **pratique** et **puissant**.
+
+En effet, cet éditeur à un fonctionnement un peu particulier. C'est un éditeur **modal**, il dispose de différents modes :
+
+- Mode **commande**, c'est celui par défaut lorsque l'on lance Vim. Il permet de lancer les commandes telles que `:q` (pour quitter vim) et énormément d'autres commandes. Il permet aussi de se déplacer dans le texte, grâce aux touches h, j, k et f.
+
+- Mode **insertion**, pour accéder à ce mode il faut cliquer sur la touche _i_. Ce mode permet d'écrire du texte.
+
+- Mode **visuel**, pour accéder à ce mode il faut cliquer sur la touche _v_. Il permet de sélectionner du texte. (c'est, pour moi, le mode le moins utile)
+
+## Les avantages de Vim
+
+Les **avantages** à l'utiliser au quotidien sont nombreux.
+
+Que ce soit en termes de rapidité ou de confort ! L'objectif est de ne jamais quitter son clavier, d'essayer de se passer de sa souris au maximum. Plus besoin de la souris pour se déplacer dans ton texte et sélectionner où tu veux mettre ton curseur (ni besoin des flèches directionnelles). Grâce aux touches _h_ (gauche), _j_ (bas), _k_ (haut) et _l_ (droite) correspondant à tes nouvelles touches directionnelles !
+
+En effet, toutes les actions du **quotidien** sont rapides. Je vais te convaincre avec quelques exemples :
+
+- Tu veux supprimer un mot ? Tapes simplement `dw` (_delete word_)
+
+- Tu veux modifier un mot ? Tapes `cw` (_change word_)
+
+- Tu veux modifier tous les paramètres de ta fonction ? Tapes `ci(` (_change inside ()_)
+
+Plus tu vas pratiquer, plus toutes ces commandes deviendront intuitives pour toi. Tu l'auras remarqué mais c'est souvent juste l'abréger de mots anglais.
+
+Bon, au début ça fait beaucoup de choses à apprendre c'est vrai. Mais ta "**courbe d'apprentissage**" est en constante évolution avec cet éditeur.
+
+En plus, celui-ci est installé sur la plupart des serveurs linux. Tu peux t'en servir lors de la configuration d'un serveur pour éditer un fichier, au lieu d'utiliser **nano** et donc gagner en rapidité même sur un autre ordinateur/serveur.
+
+## Commencer à apprendre Vim
+
+Oui, pour utiliser Vim et être à l'aise avec cet éditeur, il va falloir que tu l'apprennes.
+
+Pour ça, il y a beaucoup de ressources disponibles, tu as par exemple **vimtutor**, un outil fournit lors de l'installation de Vim sur ta machine. Tapes simplement `vimtutor fr` dans ton terminal pour entrer dans le tutoriel de l'utilisation de Vim en français.
+
+Pour apprendre de façon plus sympa les commandes de bases, il y a aussi [vim-adventures](https://vim-adventures.com/) ! C'est un site sous la forme d'un jeu qui te permettra d'apprendre les bases.
+
+Si tu veux aller plus loin et découvrir davantage de commandes/raccourcis, je te conseille ce site qui en répertorie pas mal : [vim.rtorr](https://vim.rtorr.com/). C'est un bon moyen de s'y retrouver au début.
+
+## En tant que développeur web
+
+En tant que développeur web, il a tout autant d'avantage. Notamment grâce à la commande `dit` / `cit` (_delete inside tag_ / _change inside tag_) qui permet de supprimer tout le contenu d'un tag HTML.
+
+Le développement est bien plus rapide lorsque l'on maîtrise son éditeur à la perfection, et avec Vim c'est d'autant plus flagrant.
+
+Au début c'est compliqué, il y a beaucoup de choses à apprendre. Mais au fil du temps ça devient une évidence, alors fais-moi confiance et fonce le maîtriser.
+
+## Utilisation au quotidien
+
+Il est possible de configurer Vim comme un véritable IDE capable de faire exactement les mêmes choses que ceux de la suite **Jetbrains** ou encore **Visual Studio Code**.
+
+Mais cette configuration est plutôt longue, il faudra passer par pas mal de recherches, plugins, etc.. Et je n'étais jamais entièrement satisfait de ma configuration.
+
+C'est pour cela que, au quotidien, j'utilise Vim avec **Vscode** ! Et ce grâce à l'extension **[amVim](https://marketplace.visualstudio.com/items?itemName=auiworks.amvim)** qui est pour moi la plus stable de toutes celles que j'ai pu tester.
+
+Il existe aussi [vscodevim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim), qui est bien plus téléchargé. Mais je l'ai trouvé légèrement plus lente que amVim, bien sûr c'est mon avis tu peux tester les deux.
+
+Toutes les commandes basiques sont disponibles avec ce plugin, c'est l'idéal pour lier les deux éditeurs.
+
+## Retour d'expérience
+
+Étant un utilisateur de cet éditeur, dans vscode la plupart du temps, le combo des deux est exceptionnel.
+
+Cette technique permet d'avoir un éditeur connu, souvent utilisé et d'y implémenter le fonctionnement de Vim tout en profitant des autres extensions offertes par Visual Studio Code.
+
+Le gain de temps à utiliser cette méthode d'édition est complètement fou. Même si je ne la maîtrise pas encore à la perfection, je vois déjà à quel point il peut être efficace.
+
+Si tu hésitais à sauter le pas, n'hésite plus et fonce. Si tu ne connaissais pas cet éditeur, n'hésite pas a y jeter un œil, il y a des extensions pour tout les IDE (Atom, PHPStorm, etc…) afin d'avoir les commandes Vim sans pour autant changer tout ton environnement.
+
+## Conclusion
+
+En espérant t'avoir fait découvrir cet IDE et donner envie de l'utiliser. On se retrouve pour un prochain article. (Parlant peut-être de ma config et mes extensions Visual Studio Code, qui sait ?)

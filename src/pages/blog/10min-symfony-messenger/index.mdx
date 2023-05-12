@@ -1,0 +1,201 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "10min pour comprendre Symfony Messenger",
+    date: "2021-07-20",
+    description: 'Description',
+    categories: ['Symfony'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Dans cet article, nous allons découvrir le composant **Messenger** de **Symfony** et je vais faire de mon mieux pour t'expliquer tout ça en seulement 10 minutes.
+
+## Qu'est-ce que c'est ?
+
+**Messenger** est un composant Symfony permettant de faciliter les échanges avec des applications externes ou composantes internes. Ces **échanges** peuvent être transmis de manière synchrone et même en asynchrone via des **systèmes de queue**. (**Redis**)
+
+Ce composant permet de "remettre à plus tard" des actions "bloquantes" et d'accélérer les performances de son application.
+
+Nous allons voir un exemple de cas d'utilisation pour avoir un cas un peu plus concret.
+
+## Cas d'utilisation
+
+Par exemple, imaginons une application avec un envoi de mail tout simple, mais nous souhaitons tout de même rajouter un filtre contre les **spams** via **[Akismet](https://akismet.com/)** (oui, on peut l'utiliser en dehors de WordPress..).
+
+L'utilisateur rentre donc son message via notre formulaire et le soumet. Son message est ensuite communiqué à l'API d'Akismet et est rejeté ou validé. Tout ça avant que la page se rafraîchisse, mais imaginons que l'API d'Akismet a un problème ou soit ralenti ? C'est toute notre application qui le sera aussi.
+
+D'où l’intérêt de **Messenger** : Après l’envoi du formulaire, Messenger va réceptionner le message et dire à notre application :
+
+"Ok j'ai bien reçu le message, je t’envoie une notification une fois qu'il sera publié".
+
+Ensuite, Messenger va mettre ce message dans un **bus de messages**, qui lui va se charger de remettre celui-ci à un **système de queue** (transport).
+
+Ce système gère une **file d'attente**, listant ainsi toutes les opérations en cours.
+
+Une fois notre système de détection de spam est disponible, notre message est remis dans le bus de messages pour enfin être traité. Notre application va alors appeler l'API avec le contenu du message pour savoir si celui-ci est un spam ou non et tout cela en arrière-plan.
+
+Coté utilisateur, il sera redirigé vers la page de succès sans aucun ralentissement et tout le traitement de son message sera fait en **arrière-plan**, sans qu'il ne connaisse de ralentissement, peu importe les performances de l'API et le nombre de message en cours.
+
+## Comment ça marche ?
+
+Le fonctionnement de **Messenger** par défaut est synchrone, c'est-à-dire qu'il traite les informations dès l'instant qui les reçoit. Le fonctionnement de base ressemblerait donc à ceci :
+
+1. Un **publisher** (un controller, un service, etc..) envois un message dans le **bus de message**, il le **_"dispatch"_**.
+
+3. Le **bus de message** va transmettre le **message** à son destinataire, le **handler**, on dit qu'il le **_"consume"_**.
+
+5. Le **handler** exécute une instruction définie. (Par exemple, checker via l'API Akismet si le message de contact est un spam ou non)
+
+Mais il est conseillé d'y ajouter un **transport** afin de traiter de manière asynchrone les messages, sinon l'on perd son avantage numéro 1.
+
+Un transport est un outil tel que Redis, RabbitMQ et même **Doctrine**. En asynchrone, son fonctionnement ressemblerait plutôt à ceci :
+
+On peut donc reprendre les étapes précédentes et y rajouter l'asynchrone :
+
+1. Un **publisher** (controller, service, command, …) **dispatche** un message dans le bus de message,
+
+3. Le message est envoyé via un **transport** à une file d'attente (**Adapters**), aussi appelé **système de queue** (Redis, RabbitMQ, Doctrine, …),
+
+5. Un **worker** va chercher en temps réel les messages depuis le système de queue via le transport,
+
+7. Il re-dispatche le message dans le bus,
+
+9. Le message est consommé par un **handler**.
+
+## Mise en application
+
+Nous allons maintenant passer à la pratique : comment j'intègre messenger dans mon application Symfony ?
+
+Nous allons reprendre notre exemple de notre formulaire de contact et de son appel à l'API d'Akismet pour savoir si le message est un spam ou non.
+
+### Création du message et du handler
+
+Dans un premier temps, il faut créer le **message**.
+
+Un message est une **classe de données**, elle ne doit contenir aucune logique. Il faut donc stocker uniquement des variables simples et sérialisables. Par exemple avec la classe `ContactMessage.php` :
+
+```php
+namespace App\Message;
+
+class ContactMessage
+{
+    private $data;
+    private $context;
+
+    public function __construct(array $data = [], array $context = [])
+    {
+        $this->data = $data;
+        $this->context = $context;
+    }
+
+    public function getData(): array
+    {
+        return $this->data;
+    }
+
+    public function getContext(): array
+    {
+        return $this->context;
+    }
+}
+```
+
+Maintenant, passons à notre **handler**. Un handler, aussi appelé "**gestionnaire de message**" est une classe PHP qui sait comment gérer les messages, dans notre exemple :
+
+```php
+namespace App\MessageHandler;
+
+use App\Message\ContactMessage;
+use App\SpamChecker;
+use App\Notification\ContactNotification;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+
+class ContactMessageHandler implements MessageHandlerInterface
+{
+    private $spamChecker;
+    private $notify;
+
+    public function __construct(SpamChecker $spamChecker, ContactNotification $notify)
+    {
+        $this->spamChecker = $spamChecker;
+        $this->notify = $notify;
+    }
+
+    public function __invoke(ContactMessage $message)
+    {
+        if (2 === $this->spamChecker->getSpamScore($message->getData(), $message->getContext())) {
+            throw new \RuntimeException('Blatan spam, go away !');
+        } else {
+            $this->notify($message->getData());
+        }
+    }
+}
+```
+
+Cette classe doit forcément contenir une fonction `__invoke()`, c'est elle qui gère tout le message qu'elle reçoit.
+
+Le paramètre de cette fonction va indiquer à Messenger quel message notre handler doit gérer.
+
+Ensuite, il suffit de modifier son controller pour qu'il utilise **Messenger** plutôt que d'appeler notre spamChecker directement :
+
+```php
+namespace App\Controller;
+
+use App\Form\ContactType;
+use App\Message\ContactMessage;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+
+class ContactController extends AbstractController
+{
+
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contact(Request $request, MessageBusInterface $bus)
+    {
+        $form = $this->createForm(ContactType::class, null);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+	    $context = [
+                'user_ip' => $request->getClientIp(),
+                'user_agent' => $request->headers->get('user-agent'),
+                'referrer' => $request->headers->get('referer'),
+                'permalink' => $request->getUri(),
+	    ];
+
+            $this->bus->dispatch(new ContactMessage($form->getData(), $context));
+
+            // Il est aussi possible d'utiliser le raccourci :
+            // $this->dispatchMessage(new ContactMessage($context));
+
+            $this->addFlash('success', 'Votre message a bien été envoyé !');
+
+            return $this->redirectToRoute('contact');
+        }
+
+        return $this->render('pages/contact.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+}
+```
+
+C'est la commande `$this->bus->dispatch(new ContactMessage($form->getData(), $context));` qui envoie notre message dans un bus, qui sera traité ensuite. C'est grâce à cette ligne que l'on peut rapidement redonner la main à l'utilisateur pendant que son message s’envoie sans qu'il le sache.
+
+Et voilà, nous avons vu le code ainsi que le fonctionnement de ce composant dans **Symfony**.
+
+Attention, son fonctionnement reste tout de même **synchrone**, pour le rendre **asynchrone**, il faudra configurer un **transport**.
+
+Nous verrons dans un prochain article comment configurer entièrement ce composant dans son application Symfony 5.
+
+## Conclusion
+
+Tu l'auras compris, Symfony Messenger est un composant très utile pour nos applications. Il ajoute un gain de performance non négligeable.
+
+Il ne faut donc pas hésiter à l'utiliser pour toutes les actions ayant des temps de traitement un peu long, etc.

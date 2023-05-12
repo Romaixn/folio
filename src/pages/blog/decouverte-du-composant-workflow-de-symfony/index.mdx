@@ -1,0 +1,228 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Découverte du composant workflow de Symfony",
+    date: "2022-08-16",
+    description: 'Description',
+    categories: ['Symfony', 'Tutos'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Aujourd'hui, nous allons découvrir ensemble le composant **Workflow** de **Symfony**.
+
+## Le but de ce composant
+
+L'objectif de ce composant est de reproduire des **"machines à état"** (ou **automate**) qui correspond à un modèle de mathématique.
+
+Évidemment, dit comme ça, le composant paraît hypercompliqué. Mais une image vaut 1000 mots :
+
+Explication du Workflow du site symfony.com
+
+En bref, le composant **Workflow** permet de définir plusieurs états pour une entité.
+
+Prenons l'exemple donné par **[Wikipedia](https://fr.wikipedia.org/wiki/Automate_fini#Un_premier_exemple_:_un_portillon)** :
+
+Imagine un "portillon d'accès" (comme dans le métro, tu insères ton ticket et hop tu passes), il est très simple de le représenter sous la forme d'un automate :
+
+Automate d'un portillon d'accès
+
+Ici, on peut voir que si l'on insère le ticket alors que le portillon est dans l'état "Verrouillé", alors l'automate passe dans l'état "Déverouillé" et il est alors possible de pousser afin de passer et de re-verouiller l'automate (c'est pour cela qu'il faut bien coller la personne en face pour frauder).
+
+Maintenant que tout le principe de **machine à état** est clair, nous pouvons passer à un exemple plus concret dans **Symfony** et découvrir comment ce composant peut être utile dans de nombreux projets.
+
+## Exemple d'utilisation
+
+Pour que ce soit bien plus clair, nous allons partir sur un exemple d'utilisation dans un vrai projet : mon **portfolio**.
+
+Sur mon portfolio j'ai une entité `Projet` qui contient un champ `isPublished`, `photoFilename`, ainsi qu'un champ `state`, indiquant son état (pour l'utilisation dans un workflow).
+
+Le **cycle de vie** de mon projet se déroule ainsi :
+
+1. Création du projet, ajout du `state` "_draft_" (brouillon)
+
+3. Si isPublished est à true, alors le code va aller **optimiser** l'image ajoutée (recadrement et génération du "blur" pour l'affichage en front), une fois cela fait, l'entité va passer à l'étape suivante : `ready`
+
+5. Enfin, le projet passe dans l'état `published`. (Je n'ai plus qu'à récupérer uniquement les projets avec cet état en front pour l'affichage.)
+
+Voici un schéma de mon cycle de vie :
+
+Schéma du cycle de vie de mon projet
+
+A chaque fois que je sauvegarderais un projet, il changera d'étape.
+
+S'il ne peut pas, comme dans le cas du brouillon si le projet n'a pas vocation à être publié pour le moment par exemple, il restera dans le même état.
+
+## Configurer un workflow dans un projet Symfony 6
+
+Pour configurer facilement un **cycle de vie** d'une entité dans un projet **Symfony 6**, c'est très simple.
+
+### Configuration
+
+Tout d'abord, il faut créer une propriété dans l'entité, par exemple un `string` nommé `state` !
+
+```php
+    #[ORM\Column(type: 'string', options: ['default' => 'draft'])]
+    private string $state = 'draft';
+```
+
+Je définis un état par défaut qui est "draft" (Brouillon en français).
+
+Ensuite, il faut ajouter ce workflow dans un fichier de configurer nommé `workflow.yml` (dans `config/packages`) :
+
+```yaml
+framework:
+    workflows:
+        project:
+            type: state_machine
+            audit_trail:
+                enabled: "%kernel.debug%"
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Project
+            initial_marking: draft
+            places:
+                - draft
+                - ready
+                - published
+            transitions:
+                publish:
+                    from: draft
+                    to: ready
+                optimize:
+                    from: ready
+                    to:   published
+                unpublish:
+                    from: published
+                    to: draft
+```
+
+Ce fichier va définir les différents états dont vous avez besoin pour votre entité, ainsi que les transitions. (passer de `draft` -> `ready` -> `published` -> `draft`)
+
+### Code
+
+Maintenant que notre **workflow** est défini, il nous suffit d'écrire le code qui va effectuer les diverses actions à chaque étape.
+
+Pour cela, il faut que le code soit exécuté à chaque mise à jour / création de l'entité.
+
+Il faut donc créer un **EntityListener**.
+
+Si tu veux en savoir plus sur cette notion, je t'invite à consulter la [documentation officielle](https://symfony.com/doc/current/doctrine/events.html).
+
+Pour ma part, le code ressemble à ceci (j'ai suivi [cette partie](https://symfony.com/doc/current/doctrine/events.html#doctrine-entity-listeners) de la documentation) :
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\EntityListener;
+
+use App\Entity\Project;
+use App\Message\PublishProjectMessage;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Symfony\Component\Messenger\MessageBusInterface;
+
+final class ProjectListener
+{
+    public function __construct(
+        private MessageBusInterface $bus
+    ) {
+    }
+
+    public function postPersist(Project $project, LifecycleEventArgs $event): void
+    {
+        $this->bus->dispatch(new PublishProjectMessage($project->getId()));
+    }
+
+    public function preUpdate(Project $project, LifecycleEventArgs $event): void
+    {
+        $project->setUpdatedAt(new \DateTimeImmutable());
+        $this->bus->dispatch(new PublishProjectMessage($project->getId()));
+    }
+}
+```
+
+Pour améliorer les performances de mon application, j'ai exécuté mon workflow dans un **message**, si tu ne sais pas de quoi il s'agit, je t'invite à consulter [mon article sur **Symfony Messenger**](https://rherault.fr/blog/10min-symfony-messenger).
+
+Mais tu peux très bien adapter le code pour utiliser un service, le composant **Workflow** de **Symfony** marchera parfaitement.
+
+Tout ce qu'il faut savoir, c'est qu'il faut implémenter l'interface **WorkflowInterface** pour ensuite l'utiliser dans ton code et savoir dans quel état est ton entité et quelles actions tu peux réaliser :
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\MessageHandler;
+
+use App\Entity\Project;
+use App\Message\PublishProjectMessage;
+use App\Repository\ProjectRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Workflow\WorkflowInterface;
+
+final class PublishProjectMessageHandler implements MessageHandlerInterface
+{
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly ProjectRepository $projectRepository,
+        private readonly MessageBusInterface $bus,
+        private readonly WorkflowInterface $projectStateMachine
+    ) {
+    }
+
+    public function __invoke(PublishProjectMessage $message): void
+    {
+        /** @var Project|null $project */
+        $project = $this->projectRepository->find($message->getId());
+        if (!$project) {
+            return;
+        }
+
+        // Le projet peut-il passer dans l'état "publish" ? 
+        // En d'autres mots, est-il dans l'état "draft"
+        if ($this->projectStateMachine->can($project, 'publish')) {
+            if ($project->isPublished()) {
+                // Si le projet est publié, applique l'état "publish"
+                // C'est-à-dire passe de l'état "draft" à "ready"
+                $this->projectStateMachine->apply($project, 'publish');
+                $this->entityManager->flush();
+
+                $this->bus->dispatch($message);
+            }
+        } elseif ($this->projectStateMachine->can($project, 'optimize')) {
+            // Call to a service to optimize media
+            ...
+
+            // Si le projet est prêt, applique l'état "optimize"
+            // C'est-à-dire passe de l'état "ready" à "published"
+            $this->projectStateMachine->apply($project, 'optimize');
+            $this->entityManager->flush();
+        } elseif ($this->projectStateMachine->can($project, 'unpublish')) {
+            if (!$project->isPublished()) {
+                // Si le projet est dépublié, applique l'état "unpublish"
+                // C'est-à-dire passe de l'état "publish" à "draft"
+                $this->projectStateMachine->apply($project, 'unpublish');
+                $this->entityManager->flush();
+            }
+        }
+    }
+}
+```
+
+Et voilà ! Maintenant quand tu vas modifier ton entité, tu verras son état changer en base de données.
+
+En très peu de temps tu as pu créer une machine à état et su gérer parfaitement les différents états au fur et à mesure de la vie de ton entité.
+
+Cet exemple est très simple mais tu peux très bien imaginer des workflow bien plus complexes avec une multitude d'états !
+
+Si tu veux en savoir plus ou rentrer plus en profondeur, n'hésites pas à consulter la [documentation](https://symfony.com/doc/current/workflow.html).
+
+Si tu remarques quelques coquilles dans l'article, n'hésite pas à m'en avertir en me [contactant](https://rherault.fr/contact), ce serait un plaisir !
