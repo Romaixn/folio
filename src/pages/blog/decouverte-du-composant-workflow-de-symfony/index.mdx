@@ -4,7 +4,7 @@ export const meta = {
     author: 'Romain Herault',
     title: "Découverte du composant workflow de Symfony",
     date: "2022-08-16",
-    description: 'Description',
+    description: 'Découvrez comment créer des machines à états grâce au composant Workflow de Symfony.',
     categories: ['Symfony', 'Tutos'],
 }
 
@@ -184,7 +184,7 @@ final class PublishProjectMessageHandler implements MessageHandlerInterface
             return;
         }
 
-        // Le projet peut-il passer dans l'état "publish" ? 
+        // Le projet peut-il passer dans l'état "publish" ?
         // En d'autres mots, est-il dans l'état "draft"
         if ($this->projectStateMachine->can($project, 'publish')) {
             if ($project->isPublished()) {
