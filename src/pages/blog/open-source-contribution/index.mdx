@@ -1,4 +1,5 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
+import FeaturedImage from './images/featured-image.png'
 
 export const meta = {
     author: 'Romain Herault',
@@ -6,6 +7,7 @@ export const meta = {
     date: "2022-09-26",
     description: 'Découvrez qu’est-ce que l’open source et pourquoi y contribuer à l’occasion de l’Hacktoberfest 2022.',
     categories: ['Open Source'],
+    image: FeaturedImage
 }
 
 export default (props) => <ArticleLayout meta={meta} {...props} />

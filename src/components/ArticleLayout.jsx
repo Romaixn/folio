@@ -28,11 +28,32 @@ export function ArticleLayout({
         return children
     }
 
+    const siteUrl = process.env.SITE_URL || 'https://rherault.fr'
+
     return (
         <Layout>
             <Head>
                 <title>{`${meta.title} - Romain Herault`}</title>
                 <meta name="description" content={meta.description}/>
+                <meta name="og:title" content={`${meta.title} - Romain Herault`} />
+                <meta name="og:type" content="article" />
+                <meta name="og:site_name" content="rherault" />
+                <meta name="og:description" content={meta.description} />
+                <meta property="og:locale" content="fr-FR" />
+                <meta property="article:published_time" content={meta.date} />
+                {meta.image && (
+                    <>
+                    <meta property="og:image" content={`${siteUrl}${meta.image.src}`} />
+                    <meta property="og:image:width" content={meta.image.width} />
+                    <meta property="og:image:height" content={meta.image.height} />
+                    <meta name="twitter:image" content={`${siteUrl}${meta.image.src}`} />
+                    </>
+                )}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:creator" content="@Romaixn" />
+                <meta name="twitter:site" content="@Romaixn" />
+                <meta name="twitter:title" content={`${meta.title} - Romain Herault`} />
+                <meta name="twitter:description" content={meta.description} />
             </Head>
             <div className="relative overflow-hidden bg-white py-8 sm:py-16">
                 <div
