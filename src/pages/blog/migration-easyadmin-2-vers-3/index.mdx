@@ -1,0 +1,124 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Migration EasyAdmin 2 vers 3",
+    date: "2020-07-21",
+    description: 'EasyAdmin 3 vient de sortir et nous allons découvrir comment migrer nos applications sous EasyAdmin 2 vers la version 3.',
+    categories: ['Symfony', 'Tutos'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+**EasyAdmin 3** vient de sortir cette année et il faudrait donc penser à franchir le pas : **migrer** nos applications sous EasyAdmin 2 vers la version 3.
+
+Cette nouvelle version offre pas mal de nouveautés et change complètement sa configuration. On passe de fichiers .yaml à des fichiers .php directement dans nos contrôleurs bref, incroyable. C'est pour cela qu'il peut être "difficile" de migrer et encore, EasyAdmin nous facilite pas mal la vie.
+Aller, on passe à l'installation.
+
+En suivant la [documentation officielle](https://symfony.com/doc/master/bundles/EasyAdminBundle/upgrade.html), il y a plusieurs étapes à réaliser et qui sont censées nous permettre de migrer facilement vers EasyAdmin 3 :
+
+```bash
+cd your-project/
+php bin/console make:admin:migration
+```
+
+Cette commande va créer un fichier de backup à l'endroit que vous souhaitez et préparer la mise à jour.
+Ensuite, dans le fichier composer.json il faut mettre à jour le paquet **easy-admin-bundle** à 3.0 :
+
+```json
+"easycorp/easyadmin-bundle": "^3.0",
+```
+
+et enfin faire :
+
+```bash
+composer update
+```
+
+Personnellement, à cette étape j'avais l'erreur suivante :
+
+Environment variables "APP\_ENV" are never used. Please, check your container's configuration.
+
+Après de nombreuses recherches, j'ai découvert que c'était à cause d'un fichier de configuration où j'avais utilisé la variable APP\_ENV pour l'afficher dans le menu. En supprimant cette ligne, j'ai pu mettre à jour correctement.
+
+Ensuite, si tout se passe bien, vous pouvez relancer la fameuse commande :
+
+```bash
+php bin/console make:admin:migration
+```
+
+Cette fois-ci, on va vous demander de renseigner quelques renseignements, vous avez juste à appuyer sur entrer à chaque fois si la configuration par défaut vous va.
+
+Rendez-vous ensuite dans /admin pour voir un message d'accueil "Welcome to EasyAdmin 3" et nous demandant de créer une fonction dans le fichier **DashboardController** pour définir la "page d'accueil" de notre page d'administration.
+Copier/coller le code donné et adapté le à vos besoins.
+Et voilà, si tout se passe bien vous n'avez plus rien à faire, **l'auto-migration** a bien fait son travail et vous êtes tranquilles. Si ce n'est pas le cas et la migration a tout pété, on passe à la suite.
+
+Nous allons donc parler des changements dû à la migration.
+
+## Changements dans les template
+
+Si vous aviez fait un template (comme moi, un dashboard custom par exemple) il y a eu quelques changements.
+
+- Le fichier à include à changé (@EasyAdmin/layout.html.twig)
+- l'ajout de style/script custom à lui aussi changé (le bloc s'appelle maintenant body\_javascript, head\_javascript ou encore head\_stylesheets)
+- évidemment sûrement d'autres changements que je n'aurais pas relevé
+
+## Quelques problèmes à l'auto-migration
+
+On va maintenant voir ensemble quelques problèmes que j'ai **personnellement** rencontrés, il y en a peut-être d'autres.
+
+### Editeur de texte (WYSIWYG)
+
+Si vous aviez un éditeur WYSIWYG dans une de vos entités, il va falloir faire quelques modifications. En effet, lors de la migration automatique nos champs "text\_editor" sont passés à "textarea", ce qui n'a pas du tout le même effet.
+Il faut donc faire les changements suivants pour retrouver notre bon vieux éditeur : 
+
+```php
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+...
+
+$content = TextEditorField::new('content');
+```
+
+### Champs Boolean
+
+Les boolean ne se stylisent pas bien avec la migration automatique car ils sont notés comme 'Field'.
+Il faut donc faire les changements suivants :
+
+```php
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+...
+
+$published = BooleanField::new('published');
+```
+
+### VichUploader Bundle
+
+Pour ceux qui utiliseraient VichUploader Bundle,  l'upgrade a tout pété. Mais heureusement, c'est assez simple. (même plus simple qu'avant)
+Du coup pour faire fonctionner ce bundle avec Easy Admin 3, il suffit de changer le field en "ImageField" et d'utiliser la fonction setFormType() pour bien dire à EasyAdmin que c'est une "VichImageType" :
+
+```php
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+...
+
+$imageFile = ImageField::new('imageFile')
+    ->setFormType(VichImageType::class);
+```
+
+Et pour avoir l'aperçu dans "l'index" de l'entité, il faut utiliser :
+
+```php
+$image = ImageField::new('image')
+    ->setBasePath(
+        $this->getParameter('app.path.images')
+    );
+```
+
+Si vous avez un paramètre définit dans votre service.yaml ou autre comme moi, vous pouvez utiliser la fonction getParameter(). Autrement, vous pouvez directement entrer votre chemin dans la fonction setBasePath() de ImageField de cette façon : 
+
+```php
+$image = ImageField::new('image')
+    ->setBasePath('/uploads/images/');
+```
+
+Et voilà, on peut maintenant profiter des nouveautés et des prochaines mises à jour que peut nous offrir ce Bundle. ?

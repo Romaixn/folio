@@ -1,0 +1,122 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Installer et commencer à utiliser Bedrock",
+    date: "2021-01-19",
+    description: 'Découvrez comment installer et configurer Bedrock pour le développement et la production.',
+    categories: ['WordPress'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Cet article entre dans la suite de mon article précédent sur **Bedrock** dans le but de vous convaincre encore plus d'utiliser cet outil incroyable, si vous ne l'avez pas encore lu, n'hésitez pas à [le consulter](https://blog.rherault.fr/avantages-bedrock-vs-wordpress/) avant celui-ci.
+
+Pour installer Bedrock rien de mieux que de suivre la [documentation](https://roots.io/docs/bedrock/master/installation/), cet article reprendra donc pas à pas celle-ci avec quelques explications.
+
+## Installer la base
+
+Pour installer la base de Bedrock et donc la base de notre WordPress, cela se résume en une seule commande :
+
+```
+$ composer create-project roots/bedrock
+```
+
+Cette commande va installer toute l'arborescence de Bedrock ainsi que tous les packages composer requis, y compris WordPress.
+
+## Configurer Bedrock
+
+Ensuite, il faudra renseigner quelques détails dans le fichier .env de notre projet. Ce fichier est déjà créé, il suffit de l'ouvrir et d'y découvrir les quelques lignes se trouvant à l'intérieur :
+
+Les informations de la base de données :
+
+- _DB\_NAME_ : Son nom
+- _DB\_USER_ : Son utilisateur
+- _DB\_PASSWORD_ : Le mot de passe de l'utilisateur
+- _DB\_HOST_ : Si la base de données est sur un serveur distant, sinon par défaut c'est le fameux _127.0.0.1_
+
+Ensuite, les informations propres à **WordPress** :
+
+- _WP\_ENV_ : Permet de choisir entre **development**, **staging** ou **production**. Il correspond aux différents environnements possibles, comme décrit dans le premier article.
+- WP\_HOME : L'URL de votre site web, si vous développez en local, vous pouvez simplement renseigner localhost (http://localhost:8000, par exemple)
+- WP\_SITEURL : L'URL vers les fichiers propres à WordPress, puisque Bedrock sépare bien les fichiers systèmes du reste, cette variable est nécessaire. Vous pouvez définir `${WP_HOME}/wp` par exemple.
+
+Et enfin, les variables de **salts** utiliser pour hacher les mots de passes (**\+ sécurité**). Vous pouvez les générer ici : [https://roots.io/salts.html](https://roots.io/salts.html) et copier-coller l'intégralité des variables en dessous de "Env Format".
+
+## Commencer à utiliser Bedrock
+
+Et voilà ! Vous venez d'installer et de configurer entièrement un WordPress en quelques minutes, plutôt simple non ?
+
+Maintenant, vous pouvez mettre votre thème custom dans _web/app/themes_ ou encore en installer un via **composer**. (voir plus bas pour cette technique)
+
+## Développer en local
+
+Pour développer en local, vous pouvez utiliser le serveur web interne fourni par PHP via cette commande :
+
+```
+php -S localhost:8000 -d display_errors=1 -t web
+```
+
+Cette commande va lancer un serveur web sur le port 8000 à partir du fichier **web** (très important) et afficher les erreurs.
+
+Si vous avez WAMP ou XAMP, il vous suffit de faire pointer votre Apache vers le dossier web/ de votre projet. En effet, grâce à Bedrock, votre serveur n'aura pas accès à la **racine** de votre projet et n'aura donc pas accès au fichier .env et à toute la configuration (mot de passe de la base de données, etc.)
+
+Si vous êtes un utilisateur plutôt avancé et que vous souhaitez tester **[Trellis](https://roots.io/trellis/)**, n'hésitez pas à consulter la [documentation](https://roots.io/docs/trellis/master/installation/).
+
+## Installer des dépendances
+
+### Installer des plugins
+
+Pour installer des plugins sous Bedrock, le mieux est d'utiliser **composer**. Pour cela, les plugins sont regroupés sur **[wpackagist](https://wpackagist.org/)**, c'est un **packagist** (au même stade que [celui de PHP](https://packagist.org/)) spécial WordPress, avec tout les plugins et thèmes disponibles.
+
+Ensuite, pour installer un plugin il vous suffit de faire cette commande :
+
+```
+$ composer require wpackagist-plugin/<mon-plugin>
+```
+
+### Tips pour trouver les noms des plugins
+
+Pour trouver le nom d'un plugin, rendez-vous simplement sur la page WordPress de celui-ci et le nom du plugin sera dans l'URL.
+
+Par exemple, pour Yoast SEO : https://fr.wordpress.org/plugins/wordpress-seo/, ici son nom est **wordpress-seo**.
+
+Donc l'installation se fera avec la commande suivante :
+
+```
+$ composer require wpackagist-plugin/wordpress-seo
+```
+
+### Profiter du mode dev de composer
+
+Vous pouvez profiter du mode dev de composer pour installer des plugins uniquement en environnement de développement.
+
+Par exemple, pour installer le plugin **FakerPress** (génération de posts, bien utile pendant le développement), vous pouvez utiliser la commande :
+
+```
+$ composer require wpackagist-plugin/fakerpress --dev
+```
+
+## Installer des thèmes
+
+Pareils que pour les plugins, les thèmes s'installent via **wpackagist**. Sur le site, vous pouvez filtrer pour n'avoir que les thèmes, la seule différence lors de l'installation sera le **plugin** qui se transformera en **theme** :
+
+```
+$ composer require wpackagist-theme/<mon-theme>
+```
+
+## Mise en production
+
+Pour la mise en production, rien de fou. Il faut simplement faire pointer votre serveur web vers le dossier /web de votre projet. Ensuite, installer les dépendances composer (sans le dev) :
+
+```
+$ composer install --no-dev --optimize-autoloader
+```
+
+Et pour finir, changer vos informations dans le fichier .env.
+
+## Découvrir Bedrock
+
+Et voilà, nous avons vu ensemble comment installer et utiliser Bedrock **du développement à la production**.
+
+Si vous voulez en savoir plus ou en apprendre davantage sur le fonctionnement de ce boilerplate, n'hésitez pas à consulter la [documentation officielle](https://roots.io/docs/bedrock/master/installation/).

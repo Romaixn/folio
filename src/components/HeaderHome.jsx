@@ -9,7 +9,6 @@ import NavLinks from '@/components/NavLinks'
 
 const navigation = [
   { name: 'À propos', href: '/a-propos' },
-  { name: 'Projets', href: '/projets' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
 ]

@@ -1,0 +1,167 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Mon setup VS Code",
+    date: "2021-03-25",
+    description: 'Présentation de mon environnement de travail sous Visual Studio Code.',
+    categories: ['Editeur'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Aujourd'hui, on va parler de mon **setup VS Code**, une simple présentation de l'aspect global, de mes extensions et raccourcis.
+
+Étant un utilisateur de cet éditeur au quotidien, j'ai tout fait pour que le développement soit le plus agréable possible.
+
+L'intégralité de mon setup est inspirée de **[Make VS Code Awesome](https://makevscodeawesome.com/)**.
+
+Je suis **développeur web PHP** spécialisé **Symfony** / **WordPress**. Mes extensions et raccourcis seront donc en lien avec ce domaine.
+
+## Configuration de Visual Studio Code
+
+Tout d'abord, j'ai supprimé tous les éléments "inutiles". Comme la barre de statut, la barre d'application et même les onglets !
+
+**Pourquoi supprimer les onglets ?**
+
+Tout simplement parce que j'ai remarqué que je n'aimais pas avoir beaucoup d'onglets ouverts, un peu comme si c'était le bordel sur mon bureau. Je passais mon temps à les fermer. Maintenant que je ne les vois plus, plus de problème.
+
+Ensuite, j'ai augmenté (énormément) la _line-height_, par simple goût esthétique, en mode _[r/unixporn](https://www.reddit.com/r/unixporn/)_. Grâce à ça, mon code **respire**.
+
+L'important est d'avoir envie d'ouvrir son éditeur, avoir envie de coder dedans. Il n'y a pas de "meilleur setup", il faut juste être à l'aise avec le sien et le plus productif possible.
+
+## Mes thèmes
+
+Pour les thèmes j'en utilise deux quotidiennement, selon mes envies :
+
+- [Palenight](https://marketplace.visualstudio.com/items?itemName=whizkydee.material-palenight-theme)
+
+Exemple de code avec le thème Palenight
+
+- [Nord](https://marketplace.visualstudio.com/items?itemName=arcticicestudio.nord-visual-studio-code)
+
+Exemple de code avec le thème Nord
+
+Ce sont deux thèmes que j'apprécie tout particulièrement et que je trouve agréable.
+
+## Mes extensions
+
+### Configuration de l'IDE
+
+Tout d'abord, l'extension la plus importante de toute : **[amVim](https://marketplace.visualstudio.com/items?itemName=auiworks.amvim)**. J'en ai déjà parlé dans un [article précédent](https://blog.rherault.fr/vim-au-quotidien/), mais pour faire court elle sert à avoir les commandes **Vim** dans Visual Studio Code.
+
+Ensuite, je me sers énormément de l'extension **[Project Manager](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-duplicate)**. Celle-ci sert à gérer plusieurs projets et à les ouvrir très rapidement, pratique lorsque l'on passe d'un projet à un autre souvent.
+
+Enfin, concernant la configuration de l'IDE, je me sers de deux extensions comme [**"raccourcis"**](#raccourcis).
+
+- [Duplicate Action](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-duplicate), permet de dupliquer un fichier dans l'arborescence,
+- [Toggle](https://marketplace.visualstudio.com/items?itemName=rebornix.toggle), permet d'activer/désactiver des paramètres de VS Code avec un raccourci clavier.
+
+### PHP
+
+C'est avec **PHP** que j'ai le plus d'extensions. On va commencer par la plus importante de toutes : **[PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)**.
+
+Cette extension permet d'utiliser l'outil **[Intelephense](https://intelephense.com/)**, regroupant de nombreuses fonctionnalités intéressantes :
+
+- Complétion du code,
+
+- _"Go to definition"_, la fonctionnalité la plus importante de toutes, permet en un raccourci d'accéder à une fonction ou à une variable.
+- _"Find all references"_, fonctionnalité très intéressante aussi, permets de retrouver toutes les références d'une variable dans ton projet,
+- _"Symbol search"_, recherche fonction, variables, etc… Dans votre projet.
+
+Et d'autres encore que tu peux retrouver sur [le site officiel](https://intelephense.com/). Cet outil dispose aussi d'une version "premium", avec la fonctionnalité de renommage des variables et fichiers qui peut être intéressante.
+
+Je possède de nombreux raccourcis pour rendre l'utilisation de ce plugin encore plus agréable. Nous reviendrons là-dessus dans la [partie raccourcie](#raccourcis).
+
+Concernant le formatage du code, j'utilise **[php cs fixer](https://marketplace.visualstudio.com/items?itemName=junstyle.php-cs-fixer)**. À chaque fois que je sauvegarde, ce plugin va formater mon code et le rendre PSR2 friendly.
+
+Ensuite, pour importer automatiquement les classes que j'utilise, j'utilise l'extension **[PHP Namespace Resolver](https://marketplace.visualstudio.com/items?itemName=MehediDracula.php-namespace-resolver)**. Grâce à un simple raccourci clavier, il est maintenant facile d'importer la classe que je souhaite utiliser.
+
+Enfin, concernant le debug j'utilise **[PHP Debug](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug)**, marchant avec XDebug. J'utilise cette extension plutôt rarement, il faudrait que je prenne du temps pour parfaitement l'utiliser mais c'est un outil très puissant et permettant d'éviter l'utilisation des _var\_dump_ partout.
+
+Pour finir, une extension pas forcément propre à **PHP** mais presque : [le support du langage **Twig**](https://marketplace.visualstudio.com/items?itemName=mblode.twig-language-2). Notamment utilisé dans les applications **Symfony** ou encore **Drupal**.
+
+### Javascript
+
+Pour le javascript, je n'ai pas énormément d'extension mis à part l'excellent **[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)**, permettant d'utiliser cet outil ultra-puissant directement dans Visual Studio Code. Celui-ci permet de trouver des erreurs dans ton code et de le corriger si possible.
+
+Enfin, une extension qui n'est pas utilisable uniquement avec du Javascript : [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode). Permettant de formatter (rendre beau en gros) de nombreux langages web (Javascript, HTML, CSS, etc.).
+
+## Mes raccourcis
+
+Il n'y a pas mieux que d'avoir des **raccourcis** dans son IDE et les maîtriser. Le **gain de productivité** est monstre.
+
+L'objectif est de quitter le moins possible le clavier, d'essayer de se passer au maximum de la souris. Nous allons voir ensemble l'ensemble de mes raccourcis que j'utilise le plus fréquemment.
+
+Tu peux retrouver le fichier.json de mes raccourcis en [fin d'article](#files).
+
+### Raccourcis généraux
+
+Un des raccourcis les plus importants et que j'utilise le plus couramment : CTRL + P. Ce raccourci va te permettre de rechercher un fichier par son nom, plus besoin de se faire chier avec la souris à aller dans ton arborescence. Si tu connais le nom de ton fichier, ce raccourci est hyperpratique.
+
+Ensuite, dans mes raccourcis les plus pratiques j'ai tout les raccourcis pour accéder aux différentes "zones" de l'**IDE** :
+
+- CTRL + K + E : Focus l'exploreur de fichier,
+- CTRL + K + G : Onglet Git,
+- CTRL + K + D : Debugger,
+- CTRL + K + X : Extensions,
+- CTRL + K + J : Projets
+- CTRL + T : Ouvre le terminal (ou le focus s'il est déjà ouvert, le ferme si l'on est dedans)
+
+Je possède aussi des raccourcis lorsque l'on est focus dans l'arborescence de notre projet pour effectuer diverses actions comme créer un fichier/dossier, en supprimer et même dupliquer un fichier grâce à l'extension **Duplicate file** dont l'on a parlé plus tôt.
+
+Si je veux retourner à une line-height un peu plus "normal" dans une présentation ou si j'ai besoin de visibilité dans mon code, j'utilise le raccourci CTRL + K + K qui va utiliser l'extension **Toggle** afin de changer les paramètres de VS Code.
+
+Enfin, étant principalement un utilisateur de linux, j'avais été conquis par **tmux** lors de mon utilisation du terminal. Tmux est un "multiplexeur de terminal", il permet de scinder en plusieurs parties ton terminal avec de simples raccourcis claviers.
+
+Exemple de terminal avec tmux
+
+J'ai donc voulu reproduire des raccourcis claviers pour **splitter** VS Code et de même dans le terminal intégré (encore plus pratique).
+
+Et voilà, je crois que j'ai fait le tour niveau raccourci purement "éditeur", nous allons maintenant passer aux raccourcis dans les différents langages que j'utilise au quotidien.
+
+### Raccourcis PHP / JS
+
+Les raccourcis PHP sont ceux que j'utilise le plus souvent. Par exemple, grâce à Ctrl + K Ctrl + Enter, je peux rapidement aller à la définition d'une fonction/classe. Très pratique pour debugger ou pour comprendre comment fonctionne une fonction.
+
+Ensuite, pour rechercher n'importe quelle classe, fonction ou variable dans mon fichier actuel j'utilise le raccourci Ctrl + R. Ensuite il me suffit de taper ma variable pour la retrouver dans mon fichier. De même pour trouver les fonctions dans les autres fichiers aussi, Ctrl + Shift + R.
+
+Ces raccourcis utilisent l'extension **IntelliSense**, ils fonctionnent aussi dans les fichiers **Javascript**.
+
+Enfin, en utilisant l'extension **PHP Namespace Resolver**, et au raccourci clavier Ctrl + K Ctrl + I, la classe où mon curseur est actuellement est importée automatiquement en haut de mon fichier.
+
+### Raccourcis Emmet
+
+Si tu ne connais pas **Emmet**, alors tu rates vraiment un truc. C'est un outil disponible nativement dans VS Code et permettant de générer du code HTML à la vitesse de la lumière. Par exemple, `nav.header>ul>li{Item $}*5` va générer le code suivant :
+
+```html
+<nav class="header">
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+    </ul>
+</nav>
+```
+
+Assez fou non ? Une simple ligne, un appui sur "Tab" et tout un élément HTML de générer automatiquement. Tu peux retrouver un exemple de ce qu'il est possible de faire sur [cette page](https://docs.emmet.io/cheat-sheet/).
+
+Mes raccourcis à propos d'Emmet ne vont pas parler de ce côté-là, mais de la manipulation des différents éléments HTML.
+
+L'intégralité de mes raccourcis **Emmet** vont commencer par Ctrl + M. Voici les différents raccourcis :
+
+- Ctrl + M Ctrl + I : Permet de sélectionner tout ce qu'il y a à l'intérieur d'un tag,
+- Ctrl + M Ctrl + O : Permet de sélectionner tout ce qu'il y a à l'intérieur d'un tag en l'incluant lui-même,
+- Ctrl + M Ctrl + R : Permet de renommer un tag (eh oui, pas besoin d'extension, VS Code le fait nativement.),
+- Ctrl + M Ctrl + M : Permet d'aller à la fin/début d'un tag (Jump to matching tag)
+- Ctrl + M Ctrl + Backspace : Permet de supprimer un tag (et pas ce qu'il y a dedans)
+
+Voilà pour un exemple des différents raccourcis clavier dans Visual Studio Code. Les maîtriser me fait gagner un temps fou sur certaines actions.
+
+## L'importance de maîtriser son IDE
+
+Je pense que nous avons fait le tour concernant mon **setup VS Code**.
+
+Je pense qu'il est très important de maîtriser son outil de travail et d'en connaître les "raccourcis" afin d'être encore plus **productifs**. J'ai eu beaucoup de plaisir à configurer mon éditeur pour qu'il colle parfaitement à mes attentes, c'est le **setup parfait** (pour moi bien entendu).

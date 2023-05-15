@@ -1,0 +1,185 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Utiliser Tailwind CSS 3 avec Symfony 6",
+    date: "2021-04-23",
+    description: 'Comment installer Tailwind CSS et SASS dans une application Symfony 6.',
+    categories: ['Symfony', 'Tutos'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+_Article mis à jour le 12/07/2022 avec la mise à jour de Tailwind CSS 3 et de Symfony 6._
+
+Tu as une application **Symfony** et tu veux y intégrer un peu de **Sass** et encore mieux : **Tailwind CSS** ? Cet article est fait pour toi.
+
+## Installer Webpack Encore
+
+Tout d'abord il va falloir installer **Webpack Encore**, une librairie javascript permettant d'intégrer très facilement Webpack à une application Symfony. Cet outil permet de **compiler** des dépendances front (CSS/JS) et de les intégrer dans le framework. Si tu veux en savoir plus, n'hésite pas à consulter [la documentation](https://symfony.com/doc/current/frontend.html).
+
+Pour l'installer, rien de plus simple :
+
+```bash
+composer require symfony/webpack-encore-bundle
+yarn install
+```
+
+Et voilà ! De nouveaux fichiers sont maintenant disponibles dans ton projet :
+
+- `webpack.config.js`, c'est dans ce fichier que tu vas configurer Webpack (ajouter le support de Sass par exemple).
+- `assets/`, c'est ici que tous tes fichiers CSS et JS seront.
+
+Pour tester que tout fonctionne bien, tu peux faire la commande `yarn dev` afin de compiler ton CSS et ton JS pour ensuite te rendre sur l'URL de ton projet pour voir si la couleur du fond de ta page a bien changé.
+
+### Les commandes de Webpack
+
+Webpack Encore met à disposition plusieurs commandes pratiques pour compiler notre code :
+
+- `yarn dev`, celui que l'on vient d'utiliser, sert à compiler notre CSS/JS en mode développement.
+- `yarn watch`, très pratique, sert à compiler automatiquement à chaque changement sur un fichier source
+- `yarn build`, pour compiler ses fichiers en production.
+
+## Utiliser Sass
+
+Maintenant que tu as Webpack d'installer, tu vas pouvoir installer Sass.
+
+### C'est quoi Sass ?
+
+Sass est un préprocesseur CSS, il te permet d'écrire du CSS plus confortablement et d'avoir accès à des fonctionnalités très pratiques telles que les **mixins** ou encore les conditions (_if/else_) et les boucles (_for/foreach_), tout comme dans un langage de programmation basique.
+
+### Pourquoi j'ai besoin de ça ?
+
+Tu n'as pas forcément "besoin" de Sass pour installer Tailwind CSS, mais je te le recommande. Les deux vont super bien ensemble et tu me remercieras de t'avoir fait découvrir Sass si tu ne connaissais pas.
+
+### Installer Sass
+
+Bon, maintenant que tu es convaincu, on va pouvoir passer à l'installation. Pour cela, rajoute simplement cette ligne dans ton fichier webpack.config.js :
+
+```js
+Encore
+    // ...
+
+    // Enable Sass Support
+    .enableSassLoader()
+```
+
+Ensuite, si tu essayes de faire un `yarn dev`, tu vas avoir des erreurs et Symfony va te proposer d'installer des paquets, il te suffit de suivre ces indications.
+
+Et voilà, tu peux maintenant tester ta configuration en modifiant le fichier app.css de tes _assets_ comme suit :
+
+```scss
+$body: lightgray;
+
+body {
+    background-color: $body;
+}
+```
+
+**Attention** : Pense bien à renommer ton fichier app.css en app.scss et à modifier la ligne `import './styles/app.css';` de ton fichier app.js en conséquence.
+
+Enfin, tu peux retenter un `yarn dev`. Si tout se passe bien, alors Sass est bien installé dans ton projet, on peut passer à la suite.
+
+## Installer et configurer Tailwind CSS
+
+Enfin la dernière étape : **installer Tailwind CSS**.
+
+### Installer PostCSS
+
+Pour utiliser PostCSS, il faut tout d'abord l'installer : (autoprefixer est un plugin bien utile pour ajouter automatique les prefix navigateurs à ton CSS)
+
+```bash
+yarn add postcss-loader autoprefixer --dev
+```
+
+Ensuite, créer un fichier postcss.config.js à la racine de ton projet (au même niveau que webpack.config.js) :
+
+```js
+module.exports = {
+    plugins: {
+        autoprefixer: {}
+    }
+}
+```
+
+Enfin, comme pour installer **Sass**, il faut ajouter une ligne dans le fichier webpack.config.js :
+
+```js
+Encore
+    // ...
+
+    // Enable PostCSS Support
+    .enablePostCssLoader()
+```
+
+Tu peux ensuite faire un `yarn dev` pour vérifier que tout fonctionne.
+
+### Tailwind CSS
+
+Maintenant que PostCSS est installé, on peut passer à l'action et installer le **framework CSS Tailwind CSS**.
+
+```bash
+yarn add tailwindcss --dev
+```
+
+Ensuite, il faut ajouter tailwind css comme une "dépendance" de PostCSS, en éditant son fichier de configuration :
+
+```js
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  }
+}
+```
+
+Enfin concernant les fichiers de configuration, il faut générer le fichier de tailwind avec cette commande :
+
+```bash
+npx tailwindcss init
+```
+
+Celle-ci va générer la "base" du fichier de configuration du framework (_tailwind.config.js_), c'est dans ce fichier que tu vas pouvoir configurer les couleurs, etc.. de **Tailwind** afin que celui-ci colle parfaitement à ton site.
+
+Attention, renseigne bien le chemin vers tes templates dans la partie `content` du fichier :
+
+```js
+  content: ['./templates/**/*.html.twig'],
+```
+
+En effet, depuis **Tailwind CSS 3**, le framework purge les classes CSS même en développement pour encore plus de **performances** grâce au **"Just-In-Time"** ! Si tu veux en savoir plus, ils ont fait un [article](https://tailwindcss.com/blog/tailwindcss-v3#just-in-time-all-the-time) concernant cette fonctionnalité.
+
+Et pour finir, il faut importer tailwindcss dans notre fichier app.scss :
+
+```scss
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+```
+
+Et voilà, **Tailwind CSS** vient d'être installé. Tu peux tester si tout fonctionne bien avec le fameux `yarn dev`.
+
+Tu peux maintenant tester ce framework CSS très populaire en ce moment et découvrir pourquoi.
+
+## Bonus : Tailwind CSS pour la production ?
+
+Il est possible de compiler une version "allégée" de Tailwind CSS en production. Cela permet d'éviter de charger un trop gros fichier et charge uniquement ce dont ton site a besoin.
+
+Depuis **Tailwind CSS 3**, l'**optimisation** est disponible par défaut, même en développement.
+
+Pour cela, Tailwind CSS utilise **PurgeCSS**, un module permettant de supprimer le CSS inutilisé lors de la compilation. Ce module est déjà présent de base dans ce framework CSS, il suffit de "l'activer" en remplissant la directive "content" du fichier de configuration (`tailwind.config.js`), comme nous l'avons fait plus tôt (ligne 2) :
+
+```js
+module.exports = {
+  content: ['./templates/**/*.html.twig'],
+  theme: {},
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+Dans "content", on passe simplement le chemin vers nos templates HTML. Lors de la compilation, Webpack va alors parcourir ces fichiers et générer uniquement les classes dont nous avons besoin.
+
+**Attention** : Avant de faire la commande _yarn build_, il faut que **node** soit configuré en mode **production**, pour ce faire il suffît de taper : `export NODE_ENV=production` dans un terminal

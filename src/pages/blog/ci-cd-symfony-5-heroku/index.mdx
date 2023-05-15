@@ -1,0 +1,192 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Le CI/CD sur Symfony 5 avec Heroku",
+    date: "2021-01-26",
+    description: 'Hébergez vos applications Symfony 5 sur Heroku, déploiement automatique grâce à Git.',
+    categories: ['CI-CD', 'Symfony'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Tu veux héberger tes projets Symfony à bas coût (SPOILER: c'est **gratuit**) et profiter d'un déploiement automatique ? **[Heroku](https://www.heroku.com/)** est là pour toi !
+
+Heroku est une _"platform as a Service"_, c'est une application cloud permettant aux développeurs de construire, d'exécuter leurs applications directement dans le **cloud**.
+
+Voilà comment cette plateforme fonctionne résumée simplement :
+
+- Tu développes ton application et tu l’envoies sur **GitHub** (ou **GitLab**, comme tu veux).
+- Lorsque tu as envoyé ton code, Heroku te construit automatiquement un serveur avec ton code. C'est-à-dire que s'il détecte que tu utilises PHP (grâce au composer.lock), il va te construire un serveur avec PHP. Ce fonctionnement marche aussi avec Node, Python ou autres.
+- Ensuite, ton application Heroku est (sûrement) reliée à une base de données (ou autres) via des **addons**.
+- Et enfin, Heroku va te donner une URL pour pouvoir consulter ton projet.
+
+C'est aussi simple que ça, tu pus, il déploie. Et ce, **automatiquement**.
+
+En plus, il existe une **offre gratuite** permettant de tester ce service, mais le serveur s'éteint s'il n'y a pas d'activité pendant 30min. Passé ce délai, l'accès à la page sera simplement plus long, le temps de remettre le serveur en route.
+
+## Héberger son application Symfony 5
+
+C'est bien beau tout ça, maintenant comment on utilise **Heroku** ?
+
+### Ajout du Procfile
+
+Heroku fonctionne avec un seul fichier : _Procfile_.
+
+Donc premièrement, il va falloir créer un fichier _Procfile_ à la racine de ton projet avec ce contenu :
+
+```
+web: heroku-php-apache2 public/
+```
+
+Dans le cas de notre projet Symfony 5, nous disons à Heroku d'utiliser Apache2 et de pointer le dossier public/ (là où est stocké le fichier index.php de Symfony)
+
+C'est tout ce qu'il faut faire côté code !
+
+### Création de l'application sur Heroku
+
+Maintenant, côté Heroku, il va falloir créer ton application. Pour cela, après avoir créé un compte, il faut accéder à son **[dashboard](https://dashboard.heroku.com/apps)**. Ensuite, cliquer sur _New -> Create new app_, choisir un nom et un emplacement (US ou Europe).
+
+Ensuite, tu peux choisir ta méthode de déploiement.
+
+Tu as le choix entre :
+
+- **Heroku Git**, correspondant au **Heroku Cli**
+- **GitHub**, le plus simple à mettre en place, très automatique.
+- **Container Registry**, correspondant au Heroku Cli mais pour les projets avec un environnement **Docker**. Cette méthode ne sera pas expliquée dans cet article, ne l'ayant jamais utilisé.
+
+#### Projet hébergé sur GitHub
+
+Passons à la configuration pour les projets hébergés sur GitHub, cliques simplement sur "Connect to Github"
+
+Et voilà, c'est tout. Maintenant, lorsque tu vas pousser ton code, Heroku va build automatiquement et mettre à jour son serveur.
+
+#### Projet hébergé sur GitLab (ou autre)
+
+Pour les projets hébergés sur GitLab, c'est un peu plus compliqué. Il va falloir jouer avec le **CI/CD**.
+
+**CI / CD** pour Continious Integration / Continious Delivery, correspond à l'intégration continue. C'est une logique de code qui, par exemple, lorsque tu vas pousser ton code sur Git, va exécuter tes tests, ou déployer comme dans notre cas **automatiquement**.
+
+GitLab possède son propre fonctionnement grâce au fichier .gitlab-ci.
+
+Commence par créer ce fameux fichier _.gitlab-ci.yml_ à la racine de ton projet. Dans celui-ci entre les lignes suivantes :
+
+```yaml
+image : ruby:latest
+
+production:
+  type: deploy
+  script:
+  - apt-get update -qy
+  - apt-get install -yqq ruby ruby-dev nodejs --silent
+  - gem install dpl
+  - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
+  only:
+  - master
+```
+
+> Attention à bien nommer son fichier ".gitlab-ci.yml" et pas autrement.
+
+Ce bout de code sera exécuté à chaque push sur la branche _master_. Celui-ci va utiliser un outil ce nommant **[dpl](https://docs.gitlab.com/ee/ci/examples/deployment/)** et permettant de déployer facilement notre code.
+
+Pour que celui-ci fonctionne, il faut ajouter 2 variables dans ton projet GitLab. Rends-toi dans Settings > CI / CD > Variables pour ajouter ces deux entrées :
+
+- `HEROKU_APP`, le nom de ton application
+- `HEROKU_API_KEY`, la clé API de ton compte. Tu peux la retrouver dans _[/account](https://dashboard.heroku.com/account)_, tout en bas.
+
+Grâce à ces variables, **dpl** va savoir vers quelle application déployer et comment communiquer avec Heroku grâce à son API.
+
+Et voilà, la configuration pour GitLab est terminée.
+
+Que ce soit pour GitHub ou GitLab, nous avons mis en place un **déploiement automatique** vers Heroku, passons maintenant à la configuration de celui-ci.
+
+## Configuration de Heroku
+
+Maintenant, côté Heroku, il va falloir ajouter quelques variables d'environnement ainsi qu'une base de données (si vous en avez besoin bien évidemment).
+
+### Ajout des variables d'environnements
+
+Pour ajouter les variables d'environnements nécessaires au fonctionnement de Symfony, rends-toi dans les **Settings** de ton application, et une partie "Config Vars" devrait s'afficher avec un bouton "Reveal Config Vars".
+
+En cliquant sur le bouton, tu vas pouvoir rentrer des variables comme bon te semble.
+
+Il y a deux variables absolument nécessaires pour **Symfony** :
+
+- APP\_ENV : Ici, il faut mettre "prod"
+- APP\_SECRET (optionnel) : Pour plus de sécurité, tu peux changer ce paramètre. Tu peux le générer avec PHP ou alors te rendre sur [ce générateur](http://nux.net/secret) et copier/coller la suite de caractères.
+
+### Ajout de la base de données
+
+Maintenant que notre application est presque configurée, il nous manque la base de données.
+
+Pour en ajouter une, il faut se rendre dans l'onglet "Resources", et tout en bas de cette page, il est possible d'ajouter des **addons**. Les addons sur **Heroku** sont des outils ou des services pour assurer le développement de nos applications, il y a de tout (base de données, logs, etc..). Tu peux les consulter sur [cette page](https://elements.heroku.com/addons).
+
+Une fois dans cette section, cliques sur la barre de recherche "Quickly add add-ons from Elements" et renseigne :
+
+- **ClearDB MySQL** : Si tu utilises une base de données MySQL
+- **Heroku Postgres** : Si tu utilises une base de données PostgreSQL
+
+Pour ces deux addons, une version gratuite est disponible, sélectionne-la.
+
+L'ajout de cet addon va ajouter une nouvelle variable d'environnement : `DATABASE_URL`. Grâce à celle-ci, Symfony sait quelle base de données utiliser.
+
+Pour **ClearDB MySQL**, il faudra ajouter cette variable d'environnement. Par défaut, cet Addon créer une variable nommée "CLEARDB\_DATABASE\_URL", il suffit de copier/coller son contenu et de créer la variable `DATABASE_URL` pour que cela fonctionne.
+
+Lors du développement, il est possible que tu aies besoin de faire des migrations. **Heroku ne le fait pas tout seul**.
+
+Il faut cliquer sur le bouton "More" (en haut à droite) et "Run console". Une boîte de dialogue va s'ouvrir, il te suffit de renseigner la commande que tu souhaites. Dans notre cas :
+
+```bash
+php bin/console doctrine:migrations:migrate
+```
+
+### Utilisation de Webpack Encore (ou autre)
+
+Si tu utilises Webpack Encore pour tes assets, tu as envie que Heroku compile et build tes assets à chacun de tes push.
+
+Il faut le prévenir qu'il faudra utiliser NodeJS (pour installer les node\_modules et build). Tout se passe encore une fois dans les **Settings**, juste en dessous des variables d'environnement, il y a une section "Buildpacks" où tu vas pouvoir ajouter la prise en charge de NodeJS.
+
+Cliques ensuite sur "Add buildpacks" et sur "nodejs" (sur **PHP** aussi s'il n'est pas renseigné dans la liste).
+
+> Attention, il faut que PHP soit en premier dans la liste, avant nodejs.
+
+Et voilà, à chaque builds, Heroku va maintenant installer les dépendances contenues dans le yarn.lock (ou package-lock.json) et lancer la commande `yarn build` (ou `npm run build`)
+
+## Quelques tips avec Heroku
+
+### Afficher les logs de son application
+
+Pour afficher les logs de ton application (vu qu'elle est en mode **production**), il faut changer la configuration de **monolog**, le bundle de logs de Symfony. Il faut donc modifier le contenu du fichier `config/packages/prod/monolog.yaml` comme suit :
+
+```yaml
+monolog:
+    handlers:
+        main:
+            type: fingers_crossed
+            action_level: error
+            handler: nested
+            excluded_http_codes: [404, 405]
+            buffer_size: 50
+        nested:
+            type: stream
+            # path: "%kernel.logs_dir%/%kernel.environment%.log"
+            # Required by Heroku ephemeral filesystem
+            path:  "php://stderr"
+            level: debug
+        console:
+            type: console
+            process_psr_3_messages: false
+            channels: ["!event", "!doctrine"]
+```
+
+Tout ce qui change est la ligne "path" pour que les logs s'affichent directement dans les logs de PHP et non dans un fichier. Ensuite, sur Heroku, il suffit de cliquer sur "More" > "View logs" pour voir de potentielles erreurs.
+
+### Problèmes des fichiers éphémères
+
+Sur **Heroku**, tous les fichiers mis en ligne via ton application sont **"éphémères"**, c’est-à-dire qu'ils se suppriment au bout de x temps (lorsque le serveur s'éteint ou qu'il redémarre). Le serveur redémarre automatiquement tous les jours.
+
+Pour pallier à ce problème, il faut prendre un service comme [**AWS S3**](https://aws.amazon.com/fr/s3/) d'Amazon permettant d'héberger ces fichiers, [voir ce tutoriel](https://devcenter.heroku.com/articles/s3-upload-php).
+
+## Profitez de l'automatisation offerte par Heroku
+
+Voilà, tu as réussi à faire un peu de CI/CD avec un déploiement automatique de ton site Symfony 5, cela grâce à **Heroku**.

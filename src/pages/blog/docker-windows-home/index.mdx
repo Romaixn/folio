@@ -1,0 +1,57 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Installer Docker sous Windows",
+    date: "2020-06-03",
+    description: 'Comment installer et utiliser Docker dans Windows Family (Home) avec WSL.',
+    categories: ['Tutos'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Dans cet article, nous allons parler de l'installation de **Docker** sur **Windows Home** (aussi appelé **Windows Famille**) et avec son utilisation dans **WSL** par la même occasion. 
+
+## Installer Docker dans WSL
+
+**WSL** (**W**indows **S**ubsystem **L**inux) est l'outil de Windows pour exécuter un noyau linux nativement. Vous pouvez par exemple installer **Ubuntu** en allant dans le **Microsoft Store**, en tapant "WSL" dans la barre de recherche et en sélectionnant Ubuntu.
+
+**Attention** : La version 2 de WSL est supporté par défaut avec la dernière mise à jour de Windows 10 2004 (20h1). (Sortie le 27 mai 2020)
+
+Ensuite, il vous faudra passer en **WSL2** (si vous ne l'êtes pas déjà..). Pour savoir quelle version de WSL vous utilisez, il suffit de taper la commande suivante dans un Powershell :
+
+```
+wsl --list --verbose
+```
+
+Si la version est 2, vous possédez déjà WSL2 et c'est gagné. Sinon, il suffit de passer en version 2 (la commande est à adaptée selon l'OS WSL que vous avez choisi, n'oubliez pas de vérifier que vous avez bien la mise à jour Windows requise) :
+
+```
+wsl --set-version Ubuntu 2
+```
+
+Maintenant, il faut installer l'outil **Docker Desktop** via ce [lien](https://www.docker.com/products/docker-desktop/). N'oubliez pas de cocher l'option **WSL2** lors de l'installation.
+
+Une fois que vous avez la notification comme quoi Docker s'est bien lancé sur votre machine, pourrez lancer votre WSL et lancer la commande suivantes pour voir si tout a fonctionné : 
+
+```
+docker ps
+```
+
+**Attention** : Si docker n'est pas disponible dans WSL, vous devez l'activer dans les paramètres de Docker Desktop : Resources > WSL Integration et activer le support pour votre OS.
+
+Et voilà, c'est fini ! Vous pouvez maintenant utiliser Docker, docker-compose, etc..
+
+## Problème de consommation de RAM
+
+Par défaut, l'utilisation de Docker sous Windows consomme **énormément** de RAM. Comme dit dans cette [issue](https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261), il est possible de rendre moins obèse le processus **Vmmem**. Pour ce faire, il faut créer un fichier sous : _%UserProfile%\\.wslconfig_ et mettre ces différentes lignes dedans.
+
+```
+\[wsl2\]
+memory=6GB
+swap=0
+localhostForwarding=true
+```
+
+Le nombre de GB que vous alloué est évidemment à modifier selon votre machine.
+Avec cette configuration, WSL2 prendra l'entièreté de la _memory_ que vous lui donné, mais ne dépassera jamais.

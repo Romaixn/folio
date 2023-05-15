@@ -1,0 +1,83 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+    author: 'Romain Herault',
+    title: "Test de Sulu : Un CMS basé sur Symfony",
+    date: "2021-06-11",
+    description: 'Découvrons Sulu : le CMS entièrement basé sur Symfony.',
+    categories: ['Veille technologique'],
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+"Encore un autre CMS ?" Eh oui, aujourd'hui on va parler d'un **CMS**, mais pas n'importe lequel : **Sulu**.
+
+## Sulu ? Qu'est-ce que c'est ?
+
+**Sulu** est un **CMS** (Content Managing System) **Open Source** basé entièrement sur **Symfony**. Celui-ci est plutôt orienté développeur (pour l'installation et la configuration en tout cas), comparé à WordPress par exemple.
+
+Capture d'écran prise sur le site sulu.io
+
+Vous pouvez retrouver les points forts de celui-ci sur leur [site web](https://sulu.io/) et même le tester via [ce lien](https://sulu.rocks/en).
+
+## Pourquoi je l'ai choisi ?
+
+Il existe plusieurs CMS basé sur Symfony à l'heure actuelle, après une veille technologique personnelle, j'en avais relevé deux principaux :
+
+- **Sulu**, celui dont nous allons parler aujourd'hui
+- **Bolt**, un autre qui avait l'air très bien aussi.
+
+J'ai décidé de choisir Sulu surtout grâce à son **interface d'administration** très sympa. Tu peux tester les deux et te faire un avis dessus (Pour tester Bolt il te faudra l'installer, en revanche tu peux tester Sulu en ligne) :
+
+[Tester Sulu](https://sulu.rocks/en)
+
+[Tester Bolt](https://docs.bolt.cm/installation/installation)
+
+Dans Sulu il est possible de créer des blocs customisables dans son administration et voir le résultat en **temps réel**, ce qui est un vrai plus.
+
+En étant **développeur Symfony**, tu n'auras aucun de mal à te faire la main sur Sulu. Tous les templates se gèrent avec **Twig** et tu peux créer tes **entités** et **contrôleurs** de la même manière que sur une application Symfony basique.
+
+## Fonctionnement de Sulu
+
+**Sulu** fonctionne énormément via des fichiers de configuration **XML**. J'avoue que l’XML ça fait peur des fois, moi-même ça m'a repoussé au départ, mais on s'y fait très vite.
+
+Ces différents fichiers de configuration servent à créer toutes sortes de choses :
+
+- Bloc pour l'affichage (un bloc texte, un bloc lien, tout ce que l'on peut imaginer),
+- Nouveau type de contenu,
+- Nouveau site (oui, il est possible d'avoir **plusieurs sites** sur une même instance Sulu),
+- Etc…
+
+## Passer d'une application Symfony à Sulu
+
+### Retour d'expérience : rherault.fr
+
+Pour tester ce CMS personnellement j'ai décidé de refaire mon portfolio grâce à lui. Anciennement fait en Symfony pur, je me suis dit que la transition ne devrait pas être trop méchante.
+
+J'avais uniquement besoin de quelques éléments :
+
+- Listing et affichage de mes projets avec des catégories, images, URL, etc…
+- Gestion du contenu entièrement via le CMS (le petit + comparé à mon ancien site)
+- Un formulaire de contact
+
+Pour le listing et l'affichage de mes projets, j'ai dans un premier temps créé un type de contenu personnalisé. Avant de m’apercevoir que je n'en avais pas forcément besoin.
+
+En effet, une simple page avec un type à "Projet" et le tour est jouée. Il est possible dans Sulu de définir plusieurs "types" de page, par exemple moi j'ai créé un type "Accueil" pour ma page d'accueil, qui contient des blocs différents, pareil pour les pages "Projets" et les pages par défaut.
+
+Capture d'écran de l'administration d'un projet
+
+Donc pour un projet, j'ai configuré Sulu pour qu'il me permette d'ajouter une image (une capture d'écran du projet) et enfin une URL permettant de mettre le lien vers le site s'il existe.
+
+Ensuite, un gestionnaire de bloc. C'est ici que toute la magie de Sulu opère, il est possible d'ajouter autant de blocs que l'on souhaite. J'ai personnellement un bloc "Texte" tout simple, permettant d'ajouter du texte via un **WYSIWYG**, mais aussi un bloc lien permettant d'ajouter un bouton, etc…
+
+C'est donc ainsi que je gère tout le contenu sur le site, via ce gestionnaire de bloc disponible sur toutes les pages.
+
+Enfin, le formulaire de contact. Sulu ont sorti récemment un paquet permettant de très facilement créer et personnaliser un **formulaire**. J'ai donc utilisé celui-ci pour créer mon formulaire de contact.
+
+Comme je vous l'ai décrit, ça a été un jeu d'enfant pour moi de migrer d'une application "vanilla" Symfony à Sulu.
+
+## Dois-je passer sur ce nouveau CMS ?
+
+Si tu aimes **Symfony** et que tu cherches un CMS se rapprochant au plus près de ce framework, n'hésites pas **Sulu** est très prometteur.
+
+Il est très régulièrement mis à jour avec de nouvelles fonctionnalités et n'en est qu'à ses débuts !
