@@ -9,7 +9,7 @@ import {
   const features = [
     {
       name: 'Backend',
-      description: 'Plus de 5 ans d\'expérience dans la réalisation d\'applications PHP et je maîtrise le framework Symfony 6.',
+      description: 'Plus de 6 ans d\'expérience dans la réalisation d\'applications PHP et je maîtrise le framework Symfony 6.',
       icon: ServerStackIcon,
     },
     {
