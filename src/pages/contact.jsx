@@ -230,7 +230,7 @@ export default function Contact() {
                       Informations de contact
                     </h3>
                     <p className="mt-6 max-w-3xl text-base text-red-50">
-                      Envoyez moi un mail en passant par ce formulaire ou
+                      Envoyez moi un mail <span className="line-through">en passant par ce formulaire</span> (Formulaire temporairement indisponible) ou
                       directement via mon adresse mail ci-dessous.
                     </p>
                     <dl className="mt-8 space-y-6">
@@ -296,7 +296,7 @@ export default function Contact() {
                     </ul>
                   </div>
                   {/* Contact form */}
-                  <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
+                  <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12 blur pointer-events-none">
                     <h3 className="text-lg font-medium text-gray-900">
                       Envoyez moi un message
                     </h3>
