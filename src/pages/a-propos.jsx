@@ -2,6 +2,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import Container from '@/components/Container'
+import certifiedSymfony6 from '@/images/certified-symfony-6.webp'
+import Image from 'next/image'
 
 export default function About() {
   return (
@@ -156,6 +158,13 @@ export default function About() {
                     <p>
                         N'hésitez pas à me contacter pour toute demande !
                     </p>
+                    <Image
+                        src={certifiedSymfony6}
+                        width={120}
+                        alt="Certified Symfony 6 Developer"
+                        className="mt-8 aspect-square"
+                        placeholder="blur"
+                    />
                   </div>
                 </div>
                 <div className="mt-8 inline-flex rounded-md shadow">
