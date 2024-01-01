@@ -70,7 +70,7 @@ export default function Example() {
           ))}
         </div>
         <p className="mt-8 text-center text-base text-gray-400">
-          &copy; 2023 <a rel="me" href="https://piaille.fr/@rherault">Romain Herault</a>. Tout droit réservé.
+          &copy; {new Date().getFullYear()} <a rel="me" href="https://piaille.fr/@rherault">Romain Herault</a>. Tout droit réservé.
         </p>
       </Container>
     </footer>
