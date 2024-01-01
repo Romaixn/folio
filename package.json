@@ -21,7 +21,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "@vercel/analytics": "^1.1.1",
     "autoprefixer": "^10.4.16",
-    "clsx": "^2.0.0",
+    "clsx": "^2.1.0",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.16",
     "next": "^14.0.4",
