@@ -26,8 +26,6 @@ Prenons l'exemple donné par **[Wikipedia](https://fr.wikipedia.org/wiki/Automat
 
 Imagine un "portillon d'accès" (comme dans le métro, tu insères ton ticket et hop tu passes), il est très simple de le représenter sous la forme d'un automate :
 
-Automate d'un portillon d'accès
-
 Ici, on peut voir que si l'on insère le ticket alors que le portillon est dans l'état "Verrouillé", alors l'automate passe dans l'état "Déverouillé" et il est alors possible de pousser afin de passer et de re-verouiller l'automate (c'est pour cela qu'il faut bien coller la personne en face pour frauder).
 
 Maintenant que tout le principe de **machine à état** est clair, nous pouvons passer à un exemple plus concret dans **Symfony** et découvrir comment ce composant peut être utile dans de nombreux projets.
@@ -43,10 +41,6 @@ Le **cycle de vie** de mon projet se déroule ainsi :
 1. Création du projet, ajout du `state` "_draft_" (brouillon)
 2. Si isPublished est à true, alors le code va aller **optimiser** l'image ajoutée (recadrement et génération du "blur" pour l'affichage en front), une fois cela fait, l'entité va passer à l'étape suivante : `ready`
 3. Enfin, le projet passe dans l'état `published`. (Je n'ai plus qu'à récupérer uniquement les projets avec cet état en front pour l'affichage.)
-
-Voici un schéma de mon cycle de vie :
-
-Schéma du cycle de vie de mon projet
 
 A chaque fois que je sauvegarderais un projet, il changera d'étape.
 
