@@ -125,10 +125,10 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.2.tgz#d8bae93ac8b815b2bd7a98078cf91e2724ef11e5"
   integrity sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==
 
-"@headlessui/react@^2.1.9":
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-2.1.9.tgz#d8d3ff64255177a87706cc4f24f42aeac65b1695"
-  integrity sha512-ckWw7vlKtnoa1fL2X0fx1a3t/Li9MIKDVXn3SgG65YlxvDAsNrY39PPCxVM7sQRA7go2fJsuHSSauKFNaJHH7A==
+"@headlessui/react@^2.1.10":
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-2.1.10.tgz#99cd4ca6464129726af94059bce84f931698571e"
+  integrity sha512-6mLa2fjMDAFQi+/R10B+zU3edsUk/MDtENB2zHho0lqKU1uzhAfJLUduWds4nCo8wbl3vULtC5rJfZAQ1yqIng==
   dependencies:
     "@floating-ui/react" "^0.26.16"
     "@react-aria/focus" "^3.17.1"
