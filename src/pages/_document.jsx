@@ -1,3 +1,4 @@
+import Banner from '@/components/Banner'
 import { Head, Html, Main, NextScript } from 'next/document'
 
 export default function Document(props) {
@@ -7,6 +8,7 @@ export default function Document(props) {
     <Html className="h-full" lang="fr">
       <Head />
       <body className="h-full">
+        <Banner />
         <Main />
         <NextScript />
       </body>
