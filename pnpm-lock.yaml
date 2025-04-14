@@ -45,8 +45,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       framer-motion:
-        specifier: ^12.6.5
-        version: 12.6.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^12.7.1
+        version: 12.7.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next:
         specifier: ^15.3.0
         version: 15.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -562,8 +562,8 @@ packages:
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
-  '@types/node@22.14.0':
-    resolution: {integrity: sha512-Kmpl+z84ILoG+3T/zQFyAJsU6EPTmOCj8/2+83fSN6djd6I4o7uOuGIH6vq3PrjY5BGitSbFuMN18j3iknubbA==}
+  '@types/node@22.14.1':
+    resolution: {integrity: sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==}
 
   '@types/prop-types@15.7.14':
     resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
@@ -1414,8 +1414,8 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  framer-motion@12.6.5:
-    resolution: {integrity: sha512-MKvnWov0paNjvRJuIy6x418w23tFqRfS6CXHhZrCiSEpXVlo/F+usr8v4/3G6O0u7CpsaO1qop+v4Ip7PRCBqQ==}
+  framer-motion@12.7.1:
+    resolution: {integrity: sha512-F+6Q9KbZUCnylxzZ0WMN0BoRfbH/2rZ/5sMSA1AfZN7b595BTXlMWj3nq0/2BSzcXG3P5LGv6m7+HPXWKl+8uw==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -2004,8 +2004,8 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  motion-dom@12.6.5:
-    resolution: {integrity: sha512-jpM9TQLXzYMWMJ7Ec7sAj0iis8oIuu6WvjI3yNKJLdrZyrsI/b2cRInDVL8dCl683zQQq19DpL9cSMP+k8T1NA==}
+  motion-dom@12.7.1:
+    resolution: {integrity: sha512-fE8/YcI5tQnd3h/oXnfw/wCQ8BgLFPMmdXlL9uu3l6+XLZ1Fe01jrYPPbDhSxV5GLVo22LyerlOQLMFQMVM+6A==}
 
   motion-utils@12.6.5:
     resolution: {integrity: sha512-IsOeKsOF+FWBhxQEDFBO6ZYC8/jlidmVbbLpe9/lXSA9j9kzGIMUuIBx2SZY+0reAS0DjZZ1i7dJp4NHrjocPw==}
@@ -3308,7 +3308,7 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@22.14.0':
+  '@types/node@22.14.1':
     dependencies:
       undici-types: 6.21.0
     optional: true
@@ -4359,9 +4359,9 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framer-motion@12.6.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  framer-motion@12.7.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      motion-dom: 12.6.5
+      motion-dom: 12.7.1
       motion-utils: 12.6.5
       tslib: 2.8.1
     optionalDependencies:
@@ -4710,7 +4710,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.14.0
+      '@types/node': 22.14.1
       merge-stream: 2.0.0
       supports-color: 8.1.1
     optional: true
@@ -5256,7 +5256,7 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  motion-dom@12.6.5:
+  motion-dom@12.7.1:
     dependencies:
       motion-utils: 12.6.5
 
